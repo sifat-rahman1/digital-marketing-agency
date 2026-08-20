@@ -44,9 +44,6 @@
             backdrop-filter: blur(16px);
             border-bottom: 1px solid #e2e8f0;
         }
-        .editorial-border {
-            border-color: rgba(226, 232, 240, 0.8);
-        }
         .gradient-text-light {
             background: linear-gradient(135deg, #0f172a 0%, #3730a3 50%, #0284c7 100%);
             -webkit-background-clip: text;
@@ -79,6 +76,39 @@
             transform: translateY(-3px);
             box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.08);
         }
+        /* Custom channel checkbox style */
+        .channel-chip.active {
+            background-color: #4f46e5;
+            color: #ffffff;
+            border-color: #4f46e5;
+        }
+        /* Glowing Gradient Borders on key CTA Buttons */
+        .glow-cta-btn {
+            position: relative;
+            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+            border: 1px solid rgba(199, 210, 254, 0.6);
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.35);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glow-cta-btn:hover {
+            box-shadow: 0 0 35px rgba(79, 70, 229, 0.6), 0 0 15px rgba(2, 132, 199, 0.4);
+            border-color: #a5b4fc;
+            transform: translateY(-2px);
+        }
+        /* Neon Grid Nodes */
+        .neon-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #6366f1;
+            box-shadow: 0 0 12px #6366f1, 0 0 24px #38bdf8;
+            animation: pulse-node 3.5s ease-in-out infinite alternate;
+        }
+        @keyframes pulse-node {
+            0% { transform: scale(0.8); opacity: 0.3; box-shadow: 0 0 8px #6366f1; }
+            100% { transform: scale(1.6); opacity: 1; box-shadow: 0 0 22px #6366f1, 0 0 35px #38bdf8; }
+        }
     </style>
 </head>
 <body class="overflow-x-hidden text-slate-900 bg-[#f8fafc] selection:bg-indigo-600 selection:text-white grid-bg">
@@ -94,7 +124,7 @@
             <div class="hidden md:flex items-center gap-10 text-sm font-semibold text-slate-600">
                 <a href="#services" class="hover:text-indigo-600 transition">Capabilities</a>
                 <a href="#work" class="hover:text-indigo-600 transition">Case Studies</a>
-                <a href="#results" class="hover:text-indigo-600 transition">Results & Calculator</a>
+                <a href="#estimator" class="hover:text-indigo-600 transition">Campaign Estimator</a>
                 <a href="#process" class="hover:text-indigo-600 transition">Methodology</a>
             </div>
 
@@ -113,14 +143,22 @@
     <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-2xl z-40 hidden flex-col justify-center items-center gap-8 text-2xl font-bold text-slate-900">
         <a href="#services" class="mobile-link">Capabilities</a>
         <a href="#work" class="mobile-link">Case Studies</a>
-        <a href="#results" class="mobile-link">Results</a>
+        <a href="#estimator" class="mobile-link">Campaign Estimator</a>
         <a href="#process" class="mobile-link">Methodology</a>
         <a href="#contact" class="px-8 py-3 rounded-full bg-indigo-600 text-white text-lg">Start Project</a>
     </div>
 
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Glowing Neon Grid Nodes -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="neon-node top-36 left-12" style="animation-delay: 0s;"></div>
+            <div class="neon-node top-48 right-24" style="animation-delay: 1.2s;"></div>
+            <div class="neon-node bottom-28 left-1/3" style="animation-delay: 2.4s;"></div>
+            <div class="neon-node top-1/2 right-12" style="animation-delay: 0.8s;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             
             <!-- Hero Left Column -->
             <div class="lg:col-span-7 space-y-8">
@@ -138,12 +176,12 @@
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
-                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full bg-indigo-600 text-white font-semibold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-200 flex items-center justify-center gap-3">
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full glow-cta-btn text-white font-semibold text-base flex items-center justify-center gap-3">
                         <span>Book Strategy Consultation</span>
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </a>
-                    <a href="#work" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold text-base hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-2">
-                        <span>View Client Campaigns</span>
+                    <a href="#estimator" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold text-base hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-2">
+                        <span>Estimate Your Campaign</span>
                     </a>
                 </div>
 
@@ -151,16 +189,16 @@
                 <div class="pt-6 flex items-center gap-6 text-sm text-slate-500 font-medium border-t border-slate-200/80">
                     <div class="flex items-center gap-2">
                         <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i>
-                        <span>$145M+ Revenue Generated</span>
+                        <span><strong data-counter="145" data-prefix="$" data-suffix="M+">$145M+</strong> Revenue Generated</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <i data-lucide="trending-up" class="w-5 h-5 text-emerald-600"></i>
-                        <span>4.8x Average Blended ROAS</span>
+                        <span><strong data-counter="4.8" data-suffix="x">4.8x</strong> Average Blended ROAS</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Hero Right Interactive Dashboard Spotlight -->
+            <!-- Hero Right Dashboard Visual Spotlight -->
             <div class="lg:col-span-5 relative animate-float">
                 <div class="relative w-full rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 space-y-5 hero-visual-card cursor-pointer">
                     <div class="flex items-center justify-between pb-4 border-b border-slate-100">
@@ -219,20 +257,59 @@
 
         </div>
 
-        <!-- Client Logos -->
-        <div class="max-w-7xl mx-auto mt-24 pt-10 border-t border-slate-200">
-            <p class="text-xs uppercase tracking-widest text-slate-400 mb-8 font-bold text-center">Trusted by growth leaders and venture-backed founders</p>
-            <div class="flex flex-wrap items-center justify-center gap-12 md:gap-20 text-slate-400 font-bold tracking-widest text-base">
-                <span class="hover:text-slate-900 transition">AURA ATHLETICS</span>
-                <span class="hover:text-slate-900 transition">HYPERION SAAS</span>
-                <span class="hover:text-slate-900 transition">VELOCITY LABS</span>
-                <span class="hover:text-slate-900 transition">SYNTHESIS</span>
-                <span class="hover:text-slate-900 transition">MONOLITH CAPITAL</span>
+        <!-- Official Platform Partner Badges & Client Logos Strip -->
+        <div class="max-w-7xl mx-auto mt-20 pt-10 border-t border-slate-200">
+            <p class="text-xs uppercase tracking-widest text-slate-400 mb-8 font-bold text-center">Certified Platform Partners & Ecosystem Integrations</p>
+            <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+                <!-- Meta Business Partner Badge -->
+                <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-indigo-300 transition-all hover-lift">
+                    <svg class="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                    <div>
+                        <div class="text-xs font-extrabold text-slate-900 leading-none">Meta</div>
+                        <div class="text-[10px] text-slate-500 font-semibold mt-0.5">Business Partner</div>
+                    </div>
+                </div>
+
+                <!-- Google Premier Partner Badge -->
+                <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-indigo-300 transition-all hover-lift">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                    <div>
+                        <div class="text-xs font-extrabold text-slate-900 leading-none">Google Partner</div>
+                        <div class="text-[10px] text-indigo-600 font-bold mt-0.5">Premier Tier 2026</div>
+                    </div>
+                </div>
+
+                <!-- Shopify Plus Partner Badge -->
+                <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-indigo-300 transition-all hover-lift">
+                    <svg class="w-6 h-6 text-emerald-600" viewBox="0 0 24 24" fill="currentColor"><path d="M15.34 2.8c-1.3 0-2.43.83-2.84 2.05-.2.6-.08 1.25.32 1.73.4.48 1.04.75 1.67.72 1.35 0 2.45-.88 2.8-2.1.2-.6.07-1.25-.33-1.72-.4-.48-1.04-.75-1.62-.68zM4.1 7.2l3.4 14.4c.1.4.5.7.9.7h7.2c.4 0 .8-.3.9-.7l3.4-14.4H4.1z"/></svg>
+                    <div>
+                        <div class="text-xs font-extrabold text-slate-900 leading-none">Shopify Plus</div>
+                        <div class="text-[10px] text-slate-500 font-semibold mt-0.5">Official Partner</div>
+                    </div>
+                </div>
+
+                <!-- TikTok Marketing Partner Badge -->
+                <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-indigo-300 transition-all hover-lift">
+                    <svg class="w-6 h-6 text-slate-900" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-2.86V7.5a6.34 6.34 0 0 0-5.11 6.16 6.34 6.34 0 1 0 11.45-3.83 8.33 8.33 0 0 0 4.77 1.49V7.89a4.85 4.85 0 0 1-1-.2z"/></svg>
+                    <div>
+                        <div class="text-xs font-extrabold text-slate-900 leading-none">TikTok Ads</div>
+                        <div class="text-[10px] text-slate-500 font-semibold mt-0.5">Marketing Partner</div>
+                    </div>
+                </div>
+
+                <!-- LinkedIn Partner Badge -->
+                <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-indigo-300 transition-all hover-lift">
+                    <svg class="w-6 h-6 text-sky-600" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.45 1.45 0 1 0 0 2.9 1.45 1.45 0 0 0 0-2.9z"/></svg>
+                    <div>
+                        <div class="text-xs font-extrabold text-slate-900 leading-none">LinkedIn</div>
+                        <div class="text-[10px] text-slate-500 font-semibold mt-0.5">Certified Partner</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Section 01 / CAPABILITIES (Asymmetrical Layout + Accordion/Tab details) -->
+    <!-- Section 01 / CAPABILITIES -->
     <section id="services" class="py-28 px-6 bg-white border-y border-slate-200">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-3 text-indigo-600 text-xs font-bold uppercase tracking-widest mb-3">
@@ -257,7 +334,7 @@
             <!-- Asymmetrical Capabilities Feature Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 
-                <!-- Main Featured Capability Card (Left - 7 Cols) -->
+                <!-- Main Featured Capability Card -->
                 <div class="lg:col-span-7 bg-slate-900 text-white rounded-3xl p-8 md:p-10 flex flex-col justify-between hover-lift">
                     <div class="space-y-6">
                         <div class="flex justify-between items-center">
@@ -274,7 +351,6 @@
                             </p>
                         </div>
 
-                        <!-- Feature Breakdown Pills -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
                             <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
                                 <div class="text-xs text-slate-400 font-bold uppercase">Algorithmic Bidding</div>
@@ -297,10 +373,8 @@
                     </div>
                 </div>
 
-                <!-- Secondary Capabilities Stack (Right - 5 Cols) -->
+                <!-- Secondary Capabilities Stack -->
                 <div class="lg:col-span-5 space-y-6 flex flex-col justify-between">
-                    
-                    <!-- Capability Item 2 -->
                     <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift">
                         <div class="flex items-center gap-3 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-2">
                             <i data-lucide="search" class="w-4 h-4"></i>
@@ -317,7 +391,6 @@
                         </div>
                     </div>
 
-                    <!-- Capability Item 3 -->
                     <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift">
                         <div class="flex items-center gap-3 text-sky-600 text-xs font-bold uppercase tracking-wider mb-2">
                             <i data-lucide="share-2" class="w-4 h-4"></i>
@@ -333,7 +406,6 @@
                         </div>
                     </div>
 
-                    <!-- Capability Item 4 -->
                     <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift">
                         <div class="flex items-center gap-3 text-emerald-600 text-xs font-bold uppercase tracking-wider mb-2">
                             <i data-lucide="compass" class="w-4 h-4"></i>
@@ -348,27 +420,25 @@
                             <span class="px-2.5 py-1 rounded-md bg-slate-100">Multivariate Testing</span>
                         </div>
                     </div>
-
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- Section 02 / CASE STUDIES (Storytelling Editorial Campaign Format) -->
+    <!-- Section 02 / CASE STUDIES (Storytelling Editorial Campaign Format + Hover/Tab Visual Dashboards & Ad Creatives) -->
     <section id="work" class="py-28 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-3 text-sky-600 text-xs font-bold uppercase tracking-widest mb-3">
                 <span>02</span>
                 <span class="w-8 h-px bg-sky-600"></span>
-                <span>Case Studies</span>
+                <span>Case Studies & Ad Creative Previews</span>
             </div>
 
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
                 <div>
                     <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Campaign Case Studies</h2>
                 </div>
-                <!-- Interactive Filter Tabs -->
                 <div class="flex gap-2 p-1 bg-slate-200/70 rounded-full text-xs font-bold">
                     <button class="filter-btn px-5 py-2 rounded-full bg-white text-slate-900 shadow-sm" data-filter="all">All Campaigns</button>
                     <button class="filter-btn px-5 py-2 rounded-full text-slate-600 hover:text-slate-900" data-filter="ecom">E-Commerce</button>
@@ -378,7 +448,7 @@
 
             <div class="space-y-12">
                 
-                <!-- Campaign 1: Full-Width Editorial Showcase Card -->
+                <!-- Campaign 1: Full-Width Editorial Showcase Card with Interactive View Tabs -->
                 <div class="work-card bg-white border border-slate-200 rounded-3xl p-8 md:p-12 hover-lift grid grid-cols-1 lg:grid-cols-12 gap-10 items-center" data-category="ecom">
                     <div class="lg:col-span-7 space-y-6">
                         <div class="flex items-center gap-3">
@@ -412,34 +482,83 @@
                                 <span class="text-xs text-slate-500 font-medium">Of total revenue</span>
                             </div>
                         </div>
-
-                        <div class="pt-4 flex items-center gap-4">
-                            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-indigo-600 transition">
-                                <span>Read Full Campaign Breakdown</span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
                     </div>
 
-                    <!-- Visual Campaign Badge / Dashboard Preview Card -->
-                    <div class="lg:col-span-5 bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 text-white rounded-2xl p-8 space-y-6">
-                        <div class="flex justify-between items-center text-xs font-bold text-indigo-200">
-                            <span>Campaign Performance Snapshot</span>
-                            <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300">Verified Audit</span>
+                    <!-- Interactive Campaign View Widget (Before/After Chart, Ad Creative Mockup, Live Analytics) -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="flex items-center justify-between bg-slate-100 p-1.5 rounded-2xl text-xs font-bold">
+                            <button class="case-tab-btn active px-4 py-2 rounded-xl bg-white text-slate-900 shadow-sm" data-tab="analytics-1">Before & After</button>
+                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900" data-tab="ad-creative-1">Simulated Ad</button>
+                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900" data-tab="audit-1">Live Audit</button>
                         </div>
-                        <div class="space-y-4">
-                            <div class="p-4 rounded-xl bg-white/10 border border-white/15">
-                                <div class="text-xs text-slate-300 font-bold">Paid Media Spend Allocation</div>
-                                <div class="text-xl font-extrabold text-white mt-1">$680,000 / month</div>
+
+                        <!-- Tab 1 View: Before & After Conversion Chart -->
+                        <div id="analytics-1" class="case-tab-content bg-slate-900 text-white rounded-2xl p-6 space-y-4">
+                            <div class="flex justify-between items-center text-xs font-bold text-indigo-200">
+                                <span>Conversion Funnel Optimization</span>
+                                <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300">CVR +200%</span>
                             </div>
-                            <div class="p-4 rounded-xl bg-white/10 border border-white/15">
-                                <div class="text-xs text-slate-300 font-bold">New Customer Acquisition Cost (CAC)</div>
-                                <div class="text-xl font-extrabold text-emerald-400 mt-1">$32.40 <span class="text-xs font-normal text-slate-300">(-34% vs legacy)</span></div>
+                            <div class="space-y-3 pt-2">
+                                <div>
+                                    <div class="flex justify-between text-xs text-slate-400 mb-1 font-semibold">
+                                        <span>Legacy Funnel Conversion (1.4%)</span>
+                                        <span>$52 CAC</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-3">
+                                        <div class="bg-slate-600 h-full w-[30%] rounded-full"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs text-indigo-300 mb-1 font-bold">
+                                        <span>NEBULA Optimized Funnel (4.2%)</span>
+                                        <span class="text-emerald-400">$32.40 CAC</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-3">
+                                        <div class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full w-[90%] rounded-full"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <p class="text-xs text-slate-300 italic border-t border-white/10 pt-4">
-                            "Nebula restructured our entire acquisition funnel. Their team delivered the exact scale and margin predictability we needed to raise our Series B."
-                        </p>
+
+                        <!-- Tab 2 View: Simulated Ad Creative -->
+                        <div id="ad-creative-1" class="case-tab-content hidden bg-white border border-slate-200 rounded-2xl p-5 space-y-3 shadow-md">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold flex items-center justify-center text-xs">LL</div>
+                                <div>
+                                    <div class="text-xs font-bold text-slate-900">LuxeLiving Home</div>
+                                    <div class="text-[10px] text-slate-400">Sponsored • Meta Ad Creative</div>
+                                </div>
+                            </div>
+                            <div class="h-32 rounded-xl bg-gradient-to-br from-indigo-900 to-slate-900 p-4 text-white flex flex-col justify-between relative overflow-hidden">
+                                <div class="text-xs font-extrabold uppercase bg-white/20 px-2.5 py-1 rounded w-max backdrop-blur-md">Top Performing Ad Visual</div>
+                                <div>
+                                    <div class="text-sm font-extrabold">"The Ergonomic Sofa Redefining Modern Living"</div>
+                                    <div class="text-[10px] text-indigo-200">UGC Motion Hook #4 • 4.8% Click-Through Rate</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-xs font-bold text-slate-600 pt-1">
+                                <span>Cost Per Acquisition: $28.40</span>
+                                <span class="text-emerald-600">840k Impressions</span>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3 View: Live Audit -->
+                        <div id="audit-1" class="case-tab-content hidden bg-slate-900 text-white rounded-2xl p-6 space-y-3">
+                            <div class="flex justify-between items-center text-xs font-bold text-slate-400">
+                                <span>Quarterly Attribution Report</span>
+                                <span class="text-indigo-400">Verified</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 pt-2">
+                                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                                    <div class="text-[10px] text-slate-400 font-bold uppercase">Monthly Ad Spend</div>
+                                    <div class="text-lg font-extrabold text-white">$680,000</div>
+                                </div>
+                                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                                    <div class="text-[10px] text-slate-400 font-bold uppercase">Net Revenue Generated</div>
+                                    <div class="text-lg font-extrabold text-emerald-400">$4,200,000</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -477,33 +596,64 @@
                                 <span class="text-xs text-slate-500 font-medium">Blended acquisition</span>
                             </div>
                         </div>
-
-                        <div class="pt-4 flex items-center gap-4">
-                            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-sky-600 transition">
-                                <span>Read Full Case Study</span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
                     </div>
 
-                    <div class="lg:col-span-5 bg-gradient-to-br from-sky-950 via-slate-900 to-slate-950 text-white rounded-2xl p-8 space-y-6">
-                        <div class="flex justify-between items-center text-xs font-bold text-sky-200">
-                            <span>SaaS Organic Engine</span>
-                            <span class="px-2.5 py-1 rounded bg-sky-500/20 text-sky-300">Case Breakdown</span>
+                    <!-- Interactive Campaign View Widget -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="flex items-center justify-between bg-slate-100 p-1.5 rounded-2xl text-xs font-bold">
+                            <button class="case-tab-btn active px-4 py-2 rounded-xl bg-white text-slate-900 shadow-sm" data-tab="analytics-2">Organic Growth</button>
+                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900" data-tab="ad-creative-2">Search Creative</button>
+                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900" data-tab="audit-2">SQL Funnel</button>
                         </div>
-                        <div class="space-y-4">
-                            <div class="p-4 rounded-xl bg-white/10 border border-white/15">
-                                <div class="text-xs text-slate-300 font-bold">Topical Cluster Search Traffic</div>
-                                <div class="text-xl font-extrabold text-white mt-1">1.4M Visits / Month</div>
+
+                        <!-- Tab 1 View: Organic Growth Chart -->
+                        <div id="analytics-2" class="case-tab-content bg-slate-900 text-white rounded-2xl p-6 space-y-4">
+                            <div class="flex justify-between items-center text-xs font-bold text-sky-200">
+                                <span>Organic Search Traffic Scaling</span>
+                                <span class="px-2.5 py-1 rounded bg-sky-500/20 text-sky-300">1.4M Organic Visits</span>
                             </div>
-                            <div class="p-4 rounded-xl bg-white/10 border border-white/15">
-                                <div class="text-xs text-slate-300 font-bold">Enterprise Sales Qualified Leads</div>
-                                <div class="text-xl font-extrabold text-sky-400 mt-1">840 SQls / Month</div>
+                            <div class="space-y-3 pt-2">
+                                <div class="flex justify-between text-xs text-slate-400 font-semibold">
+                                    <span>Search Keyword Position #1-3 Terms</span>
+                                    <span class="text-sky-400 font-bold">840 Ranking Terms</span>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-3">
+                                    <div class="bg-gradient-to-r from-sky-500 to-indigo-400 h-full w-[95%] rounded-full"></div>
+                                </div>
                             </div>
                         </div>
-                        <p class="text-xs text-slate-300 italic border-t border-white/10 pt-4">
-                            "The SEO topical infrastructure Nebula designed has become our single most profitable pipeline channel."
-                        </p>
+
+                        <!-- Tab 2 View: Search Creative Mockup -->
+                        <div id="ad-creative-2" class="case-tab-content hidden bg-white border border-slate-200 rounded-2xl p-5 space-y-3 shadow-md">
+                            <div class="text-[10px] text-slate-400 font-bold uppercase">High-Intent Google Search Ad</div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                                <div class="text-xs text-sky-600 font-bold">Ad • flowmetrics.ai/enterprise-analytics</div>
+                                <div class="text-sm font-extrabold text-slate-900">#1 Real-Time Analytics Platform for Enterprise</div>
+                                <div class="text-xs text-slate-600">Connect your data warehouse in 5 mins. Get 14-day free trial for engineering teams.</div>
+                            </div>
+                            <div class="flex justify-between text-xs font-bold text-slate-600 pt-1">
+                                <span>Search CVR: 8.4%</span>
+                                <span class="text-emerald-600">High-Intent Conversion</span>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3 View: SQL Funnel -->
+                        <div id="audit-2" class="case-tab-content hidden bg-slate-900 text-white rounded-2xl p-6 space-y-3">
+                            <div class="flex justify-between items-center text-xs font-bold text-slate-400">
+                                <span>Sales Qualified Lead Pipeline</span>
+                                <span class="text-emerald-400">Verified</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 pt-2">
+                                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                                    <div class="text-[10px] text-slate-400 font-bold uppercase">Monthly Demos</div>
+                                    <div class="text-lg font-extrabold text-white">120,000</div>
+                                </div>
+                                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                                    <div class="text-[10px] text-slate-400 font-bold uppercase">Enterprise SQLs</div>
+                                    <div class="text-lg font-extrabold text-sky-400">840 / mo</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -511,90 +661,126 @@
         </div>
     </section>
 
-    <!-- Section 03 / RESULTS & INTERACTIVE ROI CALCULATOR (Dark Statement Block) -->
-    <section id="results" class="py-28 px-6 bg-slate-900 text-white relative overflow-hidden">
+    <!-- Section 03 / INTERACTIVE CAMPAIGN ESTIMATOR WIDGET -->
+    <section id="estimator" class="py-28 px-6 bg-slate-900 text-white relative overflow-hidden">
         <div class="max-w-7xl mx-auto relative z-10">
             
             <div class="flex items-center gap-3 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-3">
                 <span>03</span>
                 <span class="w-8 h-px bg-indigo-400"></span>
-                <span>Track Record</span>
+                <span>Interactive Growth Estimator</span>
             </div>
 
-            <div class="max-w-3xl mb-16">
+            <div class="max-w-3xl mb-16 space-y-4">
                 <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                    Data-driven results backed by verified client audits.
+                    Estimate Your Growth Campaign
                 </h2>
+                <p class="text-slate-300 text-lg leading-relaxed">
+                    Adjust your monthly budget and select your primary target channels to instantly see tailored agency deliverables, team scope, and ROI estimates.
+                </p>
             </div>
 
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
-                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
-                    <div class="text-4xl md:text-5xl font-extrabold text-indigo-400 mb-2">$145M+</div>
-                    <div class="text-sm font-semibold text-slate-300">Client Revenue Driven</div>
-                    <div class="text-xs text-slate-500 mt-1">Across 40+ category leaders</div>
-                </div>
-                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
-                    <div class="text-4xl md:text-5xl font-extrabold text-sky-400 mb-2">4.8x</div>
-                    <div class="text-sm font-semibold text-slate-300">Average Blended ROAS</div>
-                    <div class="text-xs text-slate-500 mt-1">Paid media efficiency</div>
-                </div>
-                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
-                    <div class="text-4xl md:text-5xl font-extrabold text-indigo-400 mb-2">94%</div>
-                    <div class="text-sm font-semibold text-slate-300">Annual Retention</div>
-                    <div class="text-xs text-slate-500 mt-1">Long-term brand partners</div>
-                </div>
-                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
-                    <div class="text-4xl md:text-5xl font-extrabold text-emerald-400 mb-2">3.2M+</div>
-                    <div class="text-sm font-semibold text-slate-300">Organic Traffic / Mo</div>
-                    <div class="text-xs text-slate-500 mt-1">High-intent search traffic</div>
-                </div>
-            </div>
-
-            <!-- Interactive ROI Calculator Component -->
-            <div class="p-10 md:p-16 rounded-3xl bg-white/10 border border-white/10 backdrop-blur-xl">
-                <div class="max-w-3xl space-y-6">
-                    <div>
-                        <span class="text-xs text-indigo-400 font-bold uppercase tracking-widest block mb-1">Interactive Growth Simulator</span>
-                        <h3 class="text-2xl md:text-4xl font-extrabold text-white">Project Your Revenue Scaling</h3>
-                    </div>
-
-                    <p class="text-slate-300 text-base leading-relaxed">
-                        Adjust your current monthly paid media spend to model projected monthly revenue and annual additions based on Nebula's blended campaign performance data.
-                    </p>
+            <!-- Campaign Estimator Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                
+                <!-- Estimator Inputs (Left - 7 Cols) -->
+                <div class="lg:col-span-7 p-8 md:p-12 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl space-y-8">
                     
-                    <div class="space-y-6 pt-4">
-                        <div>
-                            <div class="flex justify-between text-sm font-bold mb-3">
-                                <span class="text-slate-300">Current Monthly Paid Media Spend:</span>
-                                <span id="spend-val" class="text-sky-400 font-extrabold text-lg">$25,000</span>
-                            </div>
-                            <input type="range" id="spend-slider" min="5000" max="250000" step="5000" value="25000" class="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                    <!-- Input 1: Budget Slider -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <label class="text-xs font-bold uppercase tracking-wider text-slate-300">Monthly Marketing Budget</label>
+                            <span id="est-budget-val" class="text-2xl font-extrabold text-sky-400">$35,000 / mo</span>
+                        </div>
+                        <input type="range" id="est-budget-slider" min="10000" max="250000" step="5000" value="35000" class="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                        <div class="flex justify-between text-[11px] text-slate-400 font-medium">
+                            <span>$10,000 / mo (Emerging)</span>
+                            <span>$100,000 / mo (Growth)</span>
+                            <span>$250,000+ / mo (Enterprise)</span>
+                        </div>
+                    </div>
+
+                    <!-- Input 2: Channel Selector Chips -->
+                    <div class="space-y-3 pt-4 border-t border-white/10">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-300 block">Select Target Channels & Disciplines</label>
+                        <div class="flex flex-wrap gap-3">
+                            <button class="channel-chip active px-4 py-2.5 rounded-full border border-white/20 text-xs font-bold transition flex items-center gap-2" data-channel="meta">
+                                <i data-lucide="zap" class="w-3.5 h-3.5"></i> Meta Ads (FB & IG)
+                            </button>
+                            <button class="channel-chip active px-4 py-2.5 rounded-full border border-white/20 text-xs font-bold transition flex items-center gap-2" data-channel="google">
+                                <i data-lucide="search" class="w-3.5 h-3.5"></i> Google Search & Intent
+                            </button>
+                            <button class="channel-chip active px-4 py-2.5 rounded-full border border-white/20 text-xs font-bold transition flex items-center gap-2" data-channel="tiktok">
+                                <i data-lucide="share-2" class="w-3.5 h-3.5"></i> TikTok & Short-Form
+                            </button>
+                            <button class="channel-chip px-4 py-2.5 rounded-full border border-white/20 text-slate-300 text-xs font-bold transition flex items-center gap-2" data-channel="seo">
+                                <i data-lucide="bar-chart-3" class="w-3.5 h-3.5"></i> Technical SEO Engine
+                            </button>
+                            <button class="channel-chip px-4 py-2.5 rounded-full border border-white/20 text-slate-300 text-xs font-bold transition flex items-center gap-2" data-channel="cro">
+                                <i data-lucide="compass" class="w-3.5 h-3.5"></i> Landing Page CRO
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Scope & Deliverables Box -->
+                    <div class="p-6 rounded-2xl bg-slate-950/60 border border-white/10 space-y-4">
+                        <div class="flex justify-between items-center text-xs font-bold text-indigo-300">
+                            <span>Tailored Campaign Scope & Team Deliverables</span>
+                            <span id="tier-badge" class="px-2.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300">Growth Tier</span>
+                        </div>
+                        <ul id="deliverables-list" class="space-y-2 text-xs text-slate-300 font-medium">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Dedicated Growth Strategist & Paid Media Lead</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Weekly Ad Creative Concepts & Motion Sprints</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Server-Side CAPI Tracking & Custom Attribution</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Estimator Output (Right - 5 Cols) -->
+                <div class="lg:col-span-5 p-8 md:p-12 rounded-3xl bg-gradient-to-br from-indigo-900/60 via-slate-900 to-indigo-950 border border-indigo-500/30 flex flex-col justify-between space-y-8">
+                    <div>
+                        <span class="text-xs text-indigo-300 font-bold uppercase tracking-widest block mb-2">Projected Performance Estimates</span>
+                        <h3 class="text-2xl font-extrabold text-white">Target Growth Output</h3>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                            <span class="text-xs text-slate-400 font-bold uppercase">Estimated Monthly Revenue</span>
+                            <div id="est-monthly-rev" class="text-4xl font-extrabold text-white mt-1">$157,500</div>
+                            <span class="text-xs text-indigo-300">Based on 4.5x target ROAS</span>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/10">
-                            <div>
-                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Projected Monthly Revenue</span>
-                                <div id="projected-rev" class="text-4xl font-extrabold text-white mt-1">$112,500</div>
-                                <span class="text-xs text-indigo-300">Based on 4.5x blended ROAS benchmark</span>
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                            <span class="text-xs text-slate-400 font-bold uppercase">Projected Net Annual Growth</span>
+                            <div id="est-annual-net" class="text-4xl font-extrabold text-emerald-400 mt-1">+$1,470,000</div>
+                            <span class="text-xs text-emerald-400">Net incremental revenue addition</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase">Target Blended ROAS</span>
+                                <div id="est-roas-range" class="text-xl font-extrabold text-sky-400 mt-1">4.2x - 5.1x</div>
                             </div>
-                            <div>
-                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Estimated Net Annual Addition</span>
-                                <div id="projected-annual" class="text-4xl font-extrabold text-emerald-400 mt-1">+$1,050,000</div>
-                                <span class="text-xs text-emerald-400 font-medium">Net incremental growth</span>
+                            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase">Estimated CAC Reduction</span>
+                                <div id="est-cac-reduction" class="text-xl font-extrabold text-emerald-400 mt-1">-32%</div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
+                    <a href="#contact" class="w-full py-4 rounded-2xl glow-cta-btn text-white font-bold text-center block">
+                        Schedule Growth Consultation
+                    </a>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <!-- Section 04 / METHODOLOGY (Connected Process Track) -->
+    <!-- Section 04 / METHODOLOGY -->
     <section id="process" class="py-28 px-6 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto">
-            
             <div class="flex items-center gap-3 text-indigo-600 text-xs font-bold uppercase tracking-widest mb-3">
                 <span>04</span>
                 <span class="w-8 h-px bg-indigo-600"></span>
@@ -610,9 +796,7 @@
                 </p>
             </div>
 
-            <!-- Connected Timeline Grid -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                
                 <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 hover-lift space-y-6">
                     <div class="flex justify-between items-center">
                         <span class="w-12 h-12 rounded-2xl bg-indigo-600 text-white font-extrabold text-lg flex items-center justify-center shadow-md">01</span>
@@ -676,15 +860,13 @@
                         Deliverable: Sustainable Profitability & Market Leadership
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Section 05 / TESTIMONIALS & EXECUTIVE PROOF -->
+    <!-- Section 05 / TESTIMONIALS -->
     <section class="py-28 px-6">
         <div class="max-w-7xl mx-auto">
-            
             <div class="flex items-center gap-3 text-sky-600 text-xs font-bold uppercase tracking-widest mb-3">
                 <span>05</span>
                 <span class="w-8 h-px bg-sky-600"></span>
@@ -698,10 +880,7 @@
                 <div class="text-xs font-bold text-slate-500 uppercase">Verified 100% Client Retention Rate</div>
             </div>
 
-            <!-- Spotlight Quote + 2 Column Grid Layout -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                
-                <!-- Main Spotlight Testimonial (Left - 7 Cols) -->
                 <div class="lg:col-span-7 bg-white border border-slate-200 rounded-3xl p-8 md:p-12 hover-lift flex flex-col justify-between space-y-8">
                     <div class="space-y-6">
                         <div class="flex justify-between items-center">
@@ -728,10 +907,7 @@
                     </div>
                 </div>
 
-                <!-- Secondary Testimonials (Right - 5 Cols) -->
                 <div class="lg:col-span-5 space-y-8 flex flex-col justify-between">
-                    
-                    <!-- Testimonial 2 -->
                     <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift space-y-6">
                         <div class="flex justify-between items-center">
                             <span class="text-amber-400 text-sm font-bold">★★★★★</span>
@@ -751,7 +927,6 @@
                         </div>
                     </div>
 
-                    <!-- Testimonial 3 -->
                     <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift space-y-6">
                         <div class="flex justify-between items-center">
                             <span class="text-amber-400 text-sm font-bold">★★★★★</span>
@@ -768,14 +943,12 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Section 06 / FINAL CTA & STRATEGY CONSULTATION FORM -->
+    <!-- Section 06 / CONTACT -->
     <section id="contact" class="py-28 px-6 relative overflow-hidden">
         <div class="max-w-5xl mx-auto bg-white border border-indigo-200 p-10 md:p-16 rounded-[36px] relative z-10 shadow-xl bg-gradient-to-b from-white to-indigo-50/40">
             <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
@@ -807,9 +980,9 @@
                 </div>
                 <div>
                     <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Growth Objectives & Current Roadblocks</label>
-                    <textarea rows="4" placeholder="Tell us about your product, target target metrics, and current acquisition bottlenecks..." class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm"></textarea>
+                    <textarea rows="4" placeholder="Tell us about your product, target metrics, and current acquisition bottlenecks..." class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm"></textarea>
                 </div>
-                <button type="submit" class="w-full py-4 rounded-2xl bg-indigo-600 text-white font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-200 flex items-center justify-center gap-3">
+                <button type="submit" class="w-full py-4 rounded-2xl glow-cta-btn text-white font-bold text-base flex items-center justify-center gap-3">
                     <span>Submit Strategy Session Request</span>
                     <i data-lucide="send" class="w-5 h-5"></i>
                 </button>
