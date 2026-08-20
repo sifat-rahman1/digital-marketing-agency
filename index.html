@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#f8fafc] text-slate-900">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEBULA | Growth & Performance Agency</title>
+    
+    <!-- Clean Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#f8fafc',
+                            card: '#ffffff',
+                            primary: '#4f46e5',
+                            sky: '#0284c7',
+                            emerald: '#10b981'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .light-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .editorial-border {
+            border-color: rgba(226, 232, 240, 0.8);
+        }
+        .gradient-text-light {
+            background: linear-gradient(135deg, #0f172a 0%, #3730a3 50%, #0284c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid-bg {
+            background-size: 48px 48px;
+            background-image: 
+                linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-visual-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hero-visual-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            box-shadow: 0 30px 60px -15px rgba(79, 70, 229, 0.2);
+        }
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.08);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden text-slate-900 bg-[#f8fafc] selection:bg-indigo-600 selection:text-white grid-bg">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 light-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-2xl font-extrabold tracking-tight flex items-center gap-2.5 text-slate-900">
+                <span class="w-3.5 h-3.5 rounded-full bg-indigo-600 shadow-sm shadow-indigo-400"></span>
+                NEBULA<span class="text-indigo-600">.</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-10 text-sm font-semibold text-slate-600">
+                <a href="#services" class="hover:text-indigo-600 transition">Capabilities</a>
+                <a href="#work" class="hover:text-indigo-600 transition">Case Studies</a>
+                <a href="#results" class="hover:text-indigo-600 transition">Results & Calculator</a>
+                <a href="#process" class="hover:text-indigo-600 transition">Methodology</a>
+            </div>
+
+            <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-indigo-600 transition-all duration-300 shadow-sm">
+                <span>Start Project</span>
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+
+            <button id="menu-btn" class="md:hidden text-slate-900">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-2xl z-40 hidden flex-col justify-center items-center gap-8 text-2xl font-bold text-slate-900">
+        <a href="#services" class="mobile-link">Capabilities</a>
+        <a href="#work" class="mobile-link">Case Studies</a>
+        <a href="#results" class="mobile-link">Results</a>
+        <a href="#process" class="mobile-link">Methodology</a>
+        <a href="#contact" class="px-8 py-3 rounded-full bg-indigo-600 text-white text-lg">Start Project</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Hero Left Column -->
+            <div class="lg:col-span-7 space-y-8">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-200 bg-indigo-50/80 text-xs font-bold tracking-wide uppercase text-indigo-700">
+                    <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+                    Performance Growth Agency
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight text-slate-900">
+                    Predictable revenue scale for <span class="gradient-text-light">category leaders.</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-slate-600 font-normal max-w-2xl leading-relaxed">
+                    We build customer acquisition engines that blend performance paid media, enterprise search authority, and conversion-engineered creative.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full bg-indigo-600 text-white font-semibold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-200 flex items-center justify-center gap-3">
+                        <span>Book Strategy Consultation</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#work" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold text-base hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-2">
+                        <span>View Client Campaigns</span>
+                    </a>
+                </div>
+
+                <!-- Proof Bar -->
+                <div class="pt-6 flex items-center gap-6 text-sm text-slate-500 font-medium border-t border-slate-200/80">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i>
+                        <span>$145M+ Revenue Generated</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="trending-up" class="w-5 h-5 text-emerald-600"></i>
+                        <span>4.8x Average Blended ROAS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Right Interactive Dashboard Spotlight -->
+            <div class="lg:col-span-5 relative animate-float">
+                <div class="relative w-full rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 space-y-5 hero-visual-card cursor-pointer">
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                            <span class="text-xs font-bold text-slate-400 ml-2">NEBULA Growth Dashboard</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold">
+                            Live Partner Data
+                        </span>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Quarterly Revenue Run-Rate</span>
+                                <div class="text-3xl font-extrabold text-white mt-1">$4,820,000</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
+                                +314% Scale
+                            </span>
+                        </div>
+
+                        <!-- Bar Graph -->
+                        <div class="space-y-2 pt-2">
+                            <div class="flex justify-between text-xs text-slate-400 font-medium">
+                                <span>Acquisition Efficiency Trend</span>
+                                <span>Target CAC Efficiency</span>
+                            </div>
+                            <div class="h-20 flex items-end justify-between gap-2">
+                                <div class="w-full bg-indigo-500/30 rounded-t-md h-[40%] hover:bg-indigo-400 transition-all duration-300"></div>
+                                <div class="w-full bg-indigo-500/50 rounded-t-md h-[55%] hover:bg-indigo-400 transition-all duration-300"></div>
+                                <div class="w-full bg-indigo-500/70 rounded-t-md h-[72%] hover:bg-indigo-400 transition-all duration-300"></div>
+                                <div class="w-full bg-indigo-500/90 rounded-t-md h-[88%] hover:bg-indigo-400 transition-all duration-300"></div>
+                                <div class="w-full bg-indigo-500 rounded-t-md h-[100%] hover:bg-indigo-400 shadow-lg shadow-indigo-500/50 transition-all duration-300"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div class="text-xs font-bold text-slate-400 uppercase">Paid Channel Efficiency</div>
+                            <div class="text-2xl font-extrabold text-slate-900 mt-1">4.82x ROAS</div>
+                            <div class="text-xs text-emerald-600 font-semibold mt-1">Verified Campaign Audit</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div class="text-xs font-bold text-slate-400 uppercase">Organic Search Pipeline</div>
+                            <div class="text-2xl font-extrabold text-slate-900 mt-1">482K/mo</div>
+                            <div class="text-xs text-indigo-600 font-semibold mt-1">High-Intent Traffic</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Client Logos -->
+        <div class="max-w-7xl mx-auto mt-24 pt-10 border-t border-slate-200">
+            <p class="text-xs uppercase tracking-widest text-slate-400 mb-8 font-bold text-center">Trusted by growth leaders and venture-backed founders</p>
+            <div class="flex flex-wrap items-center justify-center gap-12 md:gap-20 text-slate-400 font-bold tracking-widest text-base">
+                <span class="hover:text-slate-900 transition">AURA ATHLETICS</span>
+                <span class="hover:text-slate-900 transition">HYPERION SAAS</span>
+                <span class="hover:text-slate-900 transition">VELOCITY LABS</span>
+                <span class="hover:text-slate-900 transition">SYNTHESIS</span>
+                <span class="hover:text-slate-900 transition">MONOLITH CAPITAL</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 01 / CAPABILITIES (Asymmetrical Layout + Accordion/Tab details) -->
+    <section id="services" class="py-28 px-6 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-3 text-indigo-600 text-xs font-bold uppercase tracking-widest mb-3">
+                <span>01</span>
+                <span class="w-8 h-px bg-indigo-600"></span>
+                <span>Capabilities</span>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16 items-end">
+                <div class="lg:col-span-7">
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        An integrated growth stack built for sustainable profitability.
+                    </h2>
+                </div>
+                <div class="lg:col-span-5">
+                    <p class="text-slate-600 text-base leading-relaxed font-normal">
+                        Rather than managing disconnected channels, we unify paid acquisition, organic intent, social positioning, and creative CRO into one clear growth system.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Asymmetrical Capabilities Feature Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Main Featured Capability Card (Left - 7 Cols) -->
+                <div class="lg:col-span-7 bg-slate-900 text-white rounded-3xl p-8 md:p-10 flex flex-col justify-between hover-lift">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="px-3.5 py-1.5 rounded-full bg-indigo-600 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                                <i data-lucide="zap" class="w-4 h-4"></i> Performance Core
+                            </span>
+                            <span class="text-xs text-indigo-300 font-bold uppercase tracking-wider">01 / Paid & Intent Media</span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-3xl font-extrabold text-white mb-3">Paid Acquisition Engineering & Bidding Systems</h3>
+                            <p class="text-slate-300 text-base leading-relaxed max-w-xl">
+                                Multichannel paid acquisition across Google, Meta, TikTok, and LinkedIn. We replace brute-force spending with precise audience segmentation and automated ROAS allocation.
+                            </p>
+                        </div>
+
+                        <!-- Feature Breakdown Pills -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="text-xs text-slate-400 font-bold uppercase">Algorithmic Bidding</div>
+                                <div class="text-sm font-bold text-white mt-1">Target CAC Controls</div>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="text-xs text-slate-400 font-bold uppercase">Tracking Infrastructure</div>
+                                <div class="text-sm font-bold text-indigo-300 mt-1">Server CAPI & Attribution</div>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="text-xs text-slate-400 font-bold uppercase">Creative Testing</div>
+                                <div class="text-sm font-bold text-emerald-400 mt-1">Weekly Concept Velocity</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 mt-8 border-t border-white/10 flex justify-between items-center text-sm font-semibold text-slate-300">
+                        <span>Includes full campaign structure & reporting dashboard</span>
+                        <a href="#contact" class="text-white hover:text-indigo-400 flex items-center gap-1 font-bold">Inquire <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <!-- Secondary Capabilities Stack (Right - 5 Cols) -->
+                <div class="lg:col-span-5 space-y-6 flex flex-col justify-between">
+                    
+                    <!-- Capability Item 2 -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift">
+                        <div class="flex items-center gap-3 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-2">
+                            <i data-lucide="search" class="w-4 h-4"></i>
+                            <span>Search & Intent Engine</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Enterprise SEO & Topical Authority</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Dominating high-intent search terms through technical infrastructure, topic cluster architecture, and authoritative link acquisition.
+                        </p>
+                        <div class="flex items-center gap-2 text-xs font-bold text-slate-500">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100">Technical Audits</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100">Topic Clusters</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100">Digital PR</span>
+                        </div>
+                    </div>
+
+                    <!-- Capability Item 3 -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift">
+                        <div class="flex items-center gap-3 text-sky-600 text-xs font-bold uppercase tracking-wider mb-2">
+                            <i data-lucide="share-2" class="w-4 h-4"></i>
+                            <span>Content & Social Studio</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Short-Form Social & Creator Virality</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            High-velocity short-form video production, creator partnerships, and distribution systems built for customer acquisition.
+                        </p>
+                        <div class="flex items-center gap-2 text-xs font-bold text-slate-500">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100">Reels / TikTok Studio</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100">Influencer Seeding</span>
+                        </div>
+                    </div>
+
+                    <!-- Capability Item 4 -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift">
+                        <div class="flex items-center gap-3 text-emerald-600 text-xs font-bold uppercase tracking-wider mb-2">
+                            <i data-lucide="compass" class="w-4 h-4"></i>
+                            <span>Conversion Optimization</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Creative Direction & Landing Page CRO</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Conversion-engineered landing pages and ad creative concepts that convert traffic into revenue with minimal friction.
+                        </p>
+                        <div class="flex items-center gap-2 text-xs font-bold text-slate-500">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100">Landing Page Sprints</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100">Multivariate Testing</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 02 / CASE STUDIES (Storytelling Editorial Campaign Format) -->
+    <section id="work" class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-3 text-sky-600 text-xs font-bold uppercase tracking-widest mb-3">
+                <span>02</span>
+                <span class="w-8 h-px bg-sky-600"></span>
+                <span>Case Studies</span>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Campaign Case Studies</h2>
+                </div>
+                <!-- Interactive Filter Tabs -->
+                <div class="flex gap-2 p-1 bg-slate-200/70 rounded-full text-xs font-bold">
+                    <button class="filter-btn px-5 py-2 rounded-full bg-white text-slate-900 shadow-sm" data-filter="all">All Campaigns</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-slate-600 hover:text-slate-900" data-filter="ecom">E-Commerce</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-slate-600 hover:text-slate-900" data-filter="saas">SaaS & B2B</button>
+                </div>
+            </div>
+
+            <div class="space-y-12">
+                
+                <!-- Campaign 1: Full-Width Editorial Showcase Card -->
+                <div class="work-card bg-white border border-slate-200 rounded-3xl p-8 md:p-12 hover-lift grid grid-cols-1 lg:grid-cols-12 gap-10 items-center" data-category="ecom">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="flex items-center gap-3">
+                            <span class="px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-extrabold">E-Commerce Growth</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase">LuxeLiving Home ($35M ARR)</span>
+                        </div>
+
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
+                            Scaling revenue from $800k to $4.2M monthly while increasing contribution margin by 24%.
+                        </h3>
+
+                        <p class="text-slate-600 text-base leading-relaxed">
+                            LuxeLiving faced customer acquisition ceilings across Meta ads. We restructured their ad creative engine, deployed dedicated landing page funnels for top SKUs, and built an enterprise Google Shopping & SEO capture system.
+                        </p>
+
+                        <!-- Key Results Grid -->
+                        <div class="grid grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+                            <div>
+                                <span class="text-xs text-slate-400 font-bold uppercase block">Monthly Revenue</span>
+                                <div class="text-2xl font-extrabold text-slate-900 mt-1">$4.2M</div>
+                                <span class="text-xs text-emerald-600 font-bold">↑ 420% Increase</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 font-bold uppercase block">Blended ROAS</span>
+                                <div class="text-2xl font-extrabold text-indigo-600 mt-1">4.62x</div>
+                                <span class="text-xs text-slate-500 font-medium">From 1.8x baseline</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 font-bold uppercase block">Organic Revenue</span>
+                                <div class="text-2xl font-extrabold text-slate-900 mt-1">38%</div>
+                                <span class="text-xs text-slate-500 font-medium">Of total revenue</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex items-center gap-4">
+                            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-indigo-600 transition">
+                                <span>Read Full Campaign Breakdown</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Visual Campaign Badge / Dashboard Preview Card -->
+                    <div class="lg:col-span-5 bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 text-white rounded-2xl p-8 space-y-6">
+                        <div class="flex justify-between items-center text-xs font-bold text-indigo-200">
+                            <span>Campaign Performance Snapshot</span>
+                            <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300">Verified Audit</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-white/10 border border-white/15">
+                                <div class="text-xs text-slate-300 font-bold">Paid Media Spend Allocation</div>
+                                <div class="text-xl font-extrabold text-white mt-1">$680,000 / month</div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white/10 border border-white/15">
+                                <div class="text-xs text-slate-300 font-bold">New Customer Acquisition Cost (CAC)</div>
+                                <div class="text-xl font-extrabold text-emerald-400 mt-1">$32.40 <span class="text-xs font-normal text-slate-300">(-34% vs legacy)</span></div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 italic border-t border-white/10 pt-4">
+                            "Nebula restructured our entire acquisition funnel. Their team delivered the exact scale and margin predictability we needed to raise our Series B."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Campaign 2: Second Campaign Story Card -->
+                <div class="work-card bg-white border border-slate-200 rounded-3xl p-8 md:p-12 hover-lift grid grid-cols-1 lg:grid-cols-12 gap-10 items-center" data-category="saas">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="flex items-center gap-3">
+                            <span class="px-3 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-extrabold">SaaS Growth</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase">FlowMetrics AI</span>
+                        </div>
+
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
+                            From 5,000 to 120,000 organic demo signups per month via technical SEO and intent capture.
+                        </h3>
+
+                        <p class="text-slate-600 text-base leading-relaxed">
+                            FlowMetrics AI was over-reliant on expensive LinkedIn ad campaigns. We architected a 140-page programmatic SEO topical cluster engine that captured high-intent developer and enterprise decision-maker searches.
+                        </p>
+
+                        <!-- Key Results Grid -->
+                        <div class="grid grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+                            <div>
+                                <span class="text-xs text-slate-400 font-bold uppercase block">Monthly Demo Demos</span>
+                                <div class="text-2xl font-extrabold text-slate-900 mt-1">120,000</div>
+                                <span class="text-xs text-emerald-600 font-bold">↑ 24x Increase</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 font-bold uppercase block">LTV / CAC Ratio</span>
+                                <div class="text-2xl font-extrabold text-sky-600 mt-1">12.8x</div>
+                                <span class="text-xs text-slate-500 font-medium">Industry leading</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 font-bold uppercase block">CAC Reduction</span>
+                                <div class="text-2xl font-extrabold text-slate-900 mt-1">-62%</div>
+                                <span class="text-xs text-slate-500 font-medium">Blended acquisition</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex items-center gap-4">
+                            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-sky-600 transition">
+                                <span>Read Full Case Study</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-gradient-to-br from-sky-950 via-slate-900 to-slate-950 text-white rounded-2xl p-8 space-y-6">
+                        <div class="flex justify-between items-center text-xs font-bold text-sky-200">
+                            <span>SaaS Organic Engine</span>
+                            <span class="px-2.5 py-1 rounded bg-sky-500/20 text-sky-300">Case Breakdown</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-white/10 border border-white/15">
+                                <div class="text-xs text-slate-300 font-bold">Topical Cluster Search Traffic</div>
+                                <div class="text-xl font-extrabold text-white mt-1">1.4M Visits / Month</div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white/10 border border-white/15">
+                                <div class="text-xs text-slate-300 font-bold">Enterprise Sales Qualified Leads</div>
+                                <div class="text-xl font-extrabold text-sky-400 mt-1">840 SQls / Month</div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 italic border-t border-white/10 pt-4">
+                            "The SEO topical infrastructure Nebula designed has become our single most profitable pipeline channel."
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 03 / RESULTS & INTERACTIVE ROI CALCULATOR (Dark Statement Block) -->
+    <section id="results" class="py-28 px-6 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            
+            <div class="flex items-center gap-3 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-3">
+                <span>03</span>
+                <span class="w-8 h-px bg-indigo-400"></span>
+                <span>Track Record</span>
+            </div>
+
+            <div class="max-w-3xl mb-16">
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                    Data-driven results backed by verified client audits.
+                </h2>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
+                    <div class="text-4xl md:text-5xl font-extrabold text-indigo-400 mb-2">$145M+</div>
+                    <div class="text-sm font-semibold text-slate-300">Client Revenue Driven</div>
+                    <div class="text-xs text-slate-500 mt-1">Across 40+ category leaders</div>
+                </div>
+                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
+                    <div class="text-4xl md:text-5xl font-extrabold text-sky-400 mb-2">4.8x</div>
+                    <div class="text-sm font-semibold text-slate-300">Average Blended ROAS</div>
+                    <div class="text-xs text-slate-500 mt-1">Paid media efficiency</div>
+                </div>
+                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
+                    <div class="text-4xl md:text-5xl font-extrabold text-indigo-400 mb-2">94%</div>
+                    <div class="text-sm font-semibold text-slate-300">Annual Retention</div>
+                    <div class="text-xs text-slate-500 mt-1">Long-term brand partners</div>
+                </div>
+                <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
+                    <div class="text-4xl md:text-5xl font-extrabold text-emerald-400 mb-2">3.2M+</div>
+                    <div class="text-sm font-semibold text-slate-300">Organic Traffic / Mo</div>
+                    <div class="text-xs text-slate-500 mt-1">High-intent search traffic</div>
+                </div>
+            </div>
+
+            <!-- Interactive ROI Calculator Component -->
+            <div class="p-10 md:p-16 rounded-3xl bg-white/10 border border-white/10 backdrop-blur-xl">
+                <div class="max-w-3xl space-y-6">
+                    <div>
+                        <span class="text-xs text-indigo-400 font-bold uppercase tracking-widest block mb-1">Interactive Growth Simulator</span>
+                        <h3 class="text-2xl md:text-4xl font-extrabold text-white">Project Your Revenue Scaling</h3>
+                    </div>
+
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Adjust your current monthly paid media spend to model projected monthly revenue and annual additions based on Nebula's blended campaign performance data.
+                    </p>
+                    
+                    <div class="space-y-6 pt-4">
+                        <div>
+                            <div class="flex justify-between text-sm font-bold mb-3">
+                                <span class="text-slate-300">Current Monthly Paid Media Spend:</span>
+                                <span id="spend-val" class="text-sky-400 font-extrabold text-lg">$25,000</span>
+                            </div>
+                            <input type="range" id="spend-slider" min="5000" max="250000" step="5000" value="25000" class="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/10">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Projected Monthly Revenue</span>
+                                <div id="projected-rev" class="text-4xl font-extrabold text-white mt-1">$112,500</div>
+                                <span class="text-xs text-indigo-300">Based on 4.5x blended ROAS benchmark</span>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Estimated Net Annual Addition</span>
+                                <div id="projected-annual" class="text-4xl font-extrabold text-emerald-400 mt-1">+$1,050,000</div>
+                                <span class="text-xs text-emerald-400 font-medium">Net incremental growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 04 / METHODOLOGY (Connected Process Track) -->
+    <section id="process" class="py-28 px-6 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex items-center gap-3 text-indigo-600 text-xs font-bold uppercase tracking-widest mb-3">
+                <span>04</span>
+                <span class="w-8 h-px bg-indigo-600"></span>
+                <span>Methodology</span>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
+                <div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Our 4-Phase Growth Framework</h2>
+                </div>
+                <p class="text-slate-600 max-w-md font-medium text-base">
+                    Every partnership begins with deep unit economics analysis and ends with predictable, compounding market share.
+                </p>
+            </div>
+
+            <!-- Connected Timeline Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 hover-lift space-y-6">
+                    <div class="flex justify-between items-center">
+                        <span class="w-12 h-12 rounded-2xl bg-indigo-600 text-white font-extrabold text-lg flex items-center justify-center shadow-md">01</span>
+                        <span class="text-xs font-bold text-indigo-600 uppercase">Weeks 1 - 2</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Audit & Intelligence</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Deep-dive audit into your unit economics, attribution tracking, customer retention rates, and competitor acquisition gaps.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 text-xs font-bold text-slate-500">
+                        Deliverable: Growth Blueprint & Attribution Audit
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 hover-lift space-y-6">
+                    <div class="flex justify-between items-center">
+                        <span class="w-12 h-12 rounded-2xl bg-sky-600 text-white font-extrabold text-lg flex items-center justify-center shadow-md">02</span>
+                        <span class="text-xs font-bold text-sky-600 uppercase">Weeks 3 - 4</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">System Architecture</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Building dedicated conversion landing pages, high-converting ad assets, server CAPI tracking, and keyword topical clusters.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 text-xs font-bold text-slate-500">
+                        Deliverable: Ad Asset Suite & CRO Landing Pages
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 hover-lift space-y-6">
+                    <div class="flex justify-between items-center">
+                        <span class="w-12 h-12 rounded-2xl bg-purple-600 text-white font-extrabold text-lg flex items-center justify-center shadow-md">03</span>
+                        <span class="text-xs font-bold text-purple-600 uppercase">Month 2</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Aggressive Launch</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Multichannel campaign deployment across Meta, Google, and TikTok with daily algorithmic bidding adjustments and creative sprints.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 text-xs font-bold text-slate-500">
+                        Deliverable: Live Campaign Scaling & Weekly Sprints
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 hover-lift space-y-6">
+                    <div class="flex justify-between items-center">
+                        <span class="w-12 h-12 rounded-2xl bg-emerald-600 text-white font-extrabold text-lg flex items-center justify-center shadow-md">04</span>
+                        <span class="text-xs font-bold text-emerald-600 uppercase">Month 3+</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Compounding Scale</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Scaling monthly budgets efficiently while locking in organic search traffic rankings to lower overall customer acquisition costs.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 text-xs font-bold text-slate-500">
+                        Deliverable: Sustainable Profitability & Market Leadership
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 05 / TESTIMONIALS & EXECUTIVE PROOF -->
+    <section class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex items-center gap-3 text-sky-600 text-xs font-bold uppercase tracking-widest mb-3">
+                <span>05</span>
+                <span class="w-8 h-px bg-sky-600"></span>
+                <span>Executive Endorsements</span>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Direct feedback from partner executives</h2>
+                </div>
+                <div class="text-xs font-bold text-slate-500 uppercase">Verified 100% Client Retention Rate</div>
+            </div>
+
+            <!-- Spotlight Quote + 2 Column Grid Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Main Spotlight Testimonial (Left - 7 Cols) -->
+                <div class="lg:col-span-7 bg-white border border-slate-200 rounded-3xl p-8 md:p-12 hover-lift flex flex-col justify-between space-y-8">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-amber-400 text-lg font-bold">★★★★★</span>
+                            <span class="px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-extrabold">Apex Athletic ($35M ARR)</span>
+                        </div>
+
+                        <blockquote class="text-xl md:text-2xl font-semibold text-slate-900 leading-relaxed italic">
+                            "Nebula transformed our customer acquisition economics. In less than 6 months, our blended ROAS jumped from 1.8x to 4.6x while scaling monthly ad spend from $150k to $680k without sacrificing contribution margin."
+                        </blockquote>
+                    </div>
+
+                    <div class="flex items-center gap-4 pt-6 border-t border-slate-100">
+                        <div class="w-14 h-14 rounded-full bg-indigo-600 text-white font-extrabold flex items-center justify-center text-xl shadow-md">
+                            EV
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                                Elena Vance
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600"></i>
+                            </h4>
+                            <p class="text-xs text-slate-500 font-semibold">Chief Marketing Officer, Apex Athletic</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Testimonials (Right - 5 Cols) -->
+                <div class="lg:col-span-5 space-y-8 flex flex-col justify-between">
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-amber-400 text-sm font-bold">★★★★★</span>
+                            <span class="px-3 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-extrabold">HyperScale SaaS</span>
+                        </div>
+                        <p class="text-slate-700 font-medium leading-relaxed italic text-sm">
+                            "Most agencies pitch generic fluff. Nebula delivers transparent, raw revenue growth. Their technical SEO infrastructure accounts for 65% of our monthly enterprise pipeline."
+                        </p>
+                        <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                            <div class="w-10 h-10 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                                DR
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-900 text-sm">David Rostova</h5>
+                                <p class="text-xs text-slate-500 font-semibold">Founder & CEO, FlowMetrics AI</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-8 hover-lift space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-amber-400 text-sm font-bold">★★★★★</span>
+                            <span class="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-extrabold">Vesper Global</span>
+                        </div>
+                        <p class="text-slate-700 font-medium leading-relaxed italic text-sm">"The creative execution is on another level. Every ad visual and copywriting angle feels custom, high-end, and brutally effective at converting cold traffic."</p>
+                        <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                            <div class="w-10 h-10 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                                SK
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-900 text-sm">Sarah Kinsley</h5>
+                                <p class="text-xs text-slate-500 font-semibold">VP Marketing, Vesper Global</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 06 / FINAL CTA & STRATEGY CONSULTATION FORM -->
+    <section id="contact" class="py-28 px-6 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto bg-white border border-indigo-200 p-10 md:p-16 rounded-[36px] relative z-10 shadow-xl bg-gradient-to-b from-white to-indigo-50/40">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-wider">
+                    Selective Partner Intake
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Ready to scale your brand predictably?</h2>
+                <p class="text-slate-600 text-lg">We limit partner intake to a maximum of 4 new brand partnerships per quarter to ensure hyper-focused execution.</p>
+            </div>
+
+            <form id="contact-form" class="space-y-6 max-w-xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Your Name</label>
+                        <input type="text" required placeholder="Alex Mercer" class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Work Email</label>
+                        <input type="email" required placeholder="alex@company.com" class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Monthly Marketing Budget</label>
+                    <select class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm">
+                        <option>$10,000 - $25,000 / month</option>
+                        <option>$25,000 - $50,000 / month</option>
+                        <option>$50,000 - $100,000+ / month</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Growth Objectives & Current Roadblocks</label>
+                    <textarea rows="4" placeholder="Tell us about your product, target target metrics, and current acquisition bottlenecks..." class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm"></textarea>
+                </div>
+                <button type="submit" class="w-full py-4 rounded-2xl bg-indigo-600 text-white font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-200 flex items-center justify-center gap-3">
+                    <span>Submit Strategy Session Request</span>
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                </button>
+            </form>
+            <div id="form-success" class="hidden text-center p-6 text-emerald-600 font-bold text-xl">
+                Thank you! Our growth partner lead will reach out within 24 hours.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-slate-200 text-slate-500 text-sm bg-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-xl font-extrabold text-slate-900">NEBULA<span class="text-indigo-600">.</span></div>
+            <div>&copy; 2026 Nebula Growth Agency LLC. All rights reserved.</div>
+            <div class="flex gap-6 font-semibold">
+                <a href="#" class="hover:text-slate-900 transition">Privacy Policy</a>
+                <a href="#" class="hover:text-slate-900 transition">Terms</a>
+                <a href="#" class="hover:text-slate-900 transition">Twitter / X</a>
+                <a href="#" class="hover:text-slate-900 transition">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
