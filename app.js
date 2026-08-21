@@ -1,249 +1,456 @@
-// Initialize Lucide Icons after DOM content is loaded
+// NEBULA — app.js
+// Accessibility, UX, and interactivity layer.
+
 document.addEventListener("DOMContentLoaded", () => {
-    if (window.lucide) {
-        lucide.createIcons();
-    }
+    if (window.lucide) lucide.createIcons();
+
+    initMobileMenu();
+    initCounters();
+    initCaseTabs();
+    initEstimator();
+    initFilters();
+    initFaq();
+    initContactForm();
+    initScrollSpy();
+    initSmoothScrollPolyfill();
 });
 
-// Mobile Menu Toggle
-const menuBtn = document.getElementById("menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
-const mobileLinks = document.querySelectorAll(".mobile-link");
+/* ----------------------------------------------------------------
+ * Mobile menu toggle (with aria-expanded sync)
+ * ---------------------------------------------------------------- */
+function initMobileMenu() {
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
 
-if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-        mobileMenu.classList.toggle("flex");
-    });
+    if (!menuBtn || !mobileMenu) return;
 
-    mobileLinks.forEach(link => {
-        link.addEventListener("click", () => {
+    const setOpen = (open) => {
+        if (open) {
+            mobileMenu.classList.remove("hidden");
+            mobileMenu.classList.add("flex");
+        } else {
             mobileMenu.classList.add("hidden");
             mobileMenu.classList.remove("flex");
-        });
+        }
+        menuBtn.setAttribute("aria-expanded", String(open));
+        document.body.style.overflow = open ? "hidden" : "";
+    };
+
+    menuBtn.addEventListener("click", () => {
+        const isOpen = !mobileMenu.classList.contains("hidden");
+        setOpen(isOpen ? false : true);
+    });
+
+    mobileLinks.forEach((link) =>
+        link.addEventListener("click", () => setOpen(false))
+    );
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !mobileMenu.classList.contains("hidden")) {
+            setOpen(false);
+            menuBtn.focus();
+        }
     });
 }
 
-// Animated Stat Counter on Scroll
-const counters = document.querySelectorAll("[data-counter]");
+/* ----------------------------------------------------------------
+ * Animated stat counters (respects prefers-reduced-motion)
+ * ---------------------------------------------------------------- */
+function initCounters() {
+    const counters = document.querySelectorAll("[data-counter]");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (counters.length > 0 && "IntersectionObserver" in window) {
-    const counterObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                const targetVal = parseFloat(el.getAttribute("data-counter"));
-                const prefix = el.getAttribute("data-prefix") || "";
-                const suffix = el.getAttribute("data-suffix") || "";
-                const isFloat = targetVal % 1 !== 0;
-                
-                let startVal = 0;
-                const duration = 1800; // 1.8s duration
-                const startTime = performance.now();
+    if (counters.length === 0) return;
 
-                function updateCounter(currentTime) {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    // Ease out quad formula
-                    const easeProgress = progress * (2 - progress);
-                    const currentVal = startVal + (targetVal - startVal) * easeProgress;
+    if (!("IntersectionObserver" in window) || reduceMotion) {
+        counters.forEach((el) => {
+            const v = parseFloat(el.getAttribute("data-counter"));
+            const p = el.getAttribute("data-prefix") || "";
+            const s = el.getAttribute("data-suffix") || "";
+            el.textContent = `${p}${v % 1 !== 0 ? v.toFixed(1) : v.toLocaleString()}${s}`;
+        });
+        return;
+    }
 
-                    if (isFloat) {
-                        el.textContent = `${prefix}${currentVal.toFixed(1)}${suffix}`;
-                    } else {
-                        el.textContent = `${prefix}${Math.floor(currentVal).toLocaleString()}${suffix}`;
-                    }
+    const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseFloat(el.getAttribute("data-counter"));
+            const prefix = el.getAttribute("data-prefix") || "";
+            const suffix = el.getAttribute("data-suffix") || "";
+            const isFloat = target % 1 !== 0;
+            const duration = 1800;
+            const start = performance.now();
 
-                    if (progress < 1) {
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        if (isFloat) {
-                            el.textContent = `${prefix}${targetVal.toFixed(1)}${suffix}`;
-                        } else {
-                            el.textContent = `${prefix}${targetVal.toLocaleString()}${suffix}`;
-                        }
-                    }
-                }
-
-                requestAnimationFrame(updateCounter);
-                observer.unobserve(el);
-            }
+            const tick = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const ease = progress * (2 - progress);
+                const val = target * ease;
+                el.textContent = isFloat
+                    ? `${prefix}${val.toFixed(1)}${suffix}`
+                    : `${prefix}${Math.floor(val).toLocaleString()}${suffix}`;
+                if (progress < 1) requestAnimationFrame(tick);
+                else el.textContent = isFloat
+                    ? `${prefix}${target.toFixed(1)}${suffix}`
+                    : `${prefix}${target.toLocaleString()}${suffix}`;
+            };
+            requestAnimationFrame(tick);
+            observer.unobserve(el);
         });
     }, { threshold: 0.2 });
 
-    counters.forEach(counter => counterObserver.observe(counter));
+    counters.forEach((c) => obs.observe(c));
 }
 
-// Case Study View Tabs (Before/After Chart, Simulated Ad Creative, Live Audit)
-const caseTabBtns = document.querySelectorAll(".case-tab-btn");
+/* ----------------------------------------------------------------
+ * Case study tabs (ARIA-aware, keyboard navigable)
+ * ---------------------------------------------------------------- */
+function initCaseTabs() {
+    const groups = document.querySelectorAll('[role="tablist"]');
 
-caseTabBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-        const parentWidget = btn.closest(".lg\\:col-span-5");
-        if (!parentWidget) return;
+    groups.forEach((list) => {
+        const tabs = Array.from(list.querySelectorAll('[role="tab"]'));
 
-        const siblingBtns = parentWidget.querySelectorAll(".case-tab-btn");
-        siblingBtns.forEach(b => {
-            b.classList.remove("active", "bg-white", "text-slate-900", "shadow-sm");
-            b.classList.add("text-slate-600");
+        const activate = (tab, setFocus = true) => {
+            const panelId = tab.getAttribute("aria-controls");
+            tabs.forEach((t) => {
+                const selected = t === tab;
+                t.setAttribute("aria-selected", String(selected));
+                t.classList.toggle("active", selected);
+                t.classList.toggle("bg-white", selected);
+                t.classList.toggle("text-slate-900", selected);
+                t.classList.toggle("shadow-sm", selected);
+                t.classList.toggle("text-slate-600", !selected);
+            });
+            list.parentElement.querySelectorAll(".case-tab-content").forEach((panel) => {
+                panel.classList.toggle("hidden", panel.id !== panelId);
+            });
+            if (setFocus) tab.focus();
+        };
+
+        tabs.forEach((tab, i) => {
+            tab.addEventListener("click", () => activate(tab, false));
+            tab.addEventListener("keydown", (e) => {
+                let next = null;
+                if (e.key === "ArrowRight") next = tabs[(i + 1) % tabs.length];
+                else if (e.key === "ArrowLeft") next = tabs[(i - 1 + tabs.length) % tabs.length];
+                else if (e.key === "Home") next = tabs[0];
+                else if (e.key === "End") next = tabs[tabs.length - 1];
+                if (next) {
+                    e.preventDefault();
+                    activate(next);
+                }
+            });
+        });
+    });
+}
+
+/* ----------------------------------------------------------------
+ * Interactive Growth Estimator + budget pre-fill bridge
+ * ---------------------------------------------------------------- */
+function initEstimator() {
+    const slider = document.getElementById("est-budget-slider");
+    const budgetVal = document.getElementById("est-budget-val");
+    const monthlyRev = document.getElementById("est-monthly-rev");
+    const annualNet = document.getElementById("est-annual-net");
+    const roasRange = document.getElementById("est-roas-range");
+    const cacReduction = document.getElementById("est-cac-reduction");
+    const deliverablesList = document.getElementById("deliverables-list");
+    const tierBadge = document.getElementById("tier-badge");
+    const chips = document.querySelectorAll(".channel-chip");
+    const contactBudget = document.getElementById("cf-budget");
+
+    if (!slider) return;
+
+    const STORAGE_KEY = "nebula_est_budget";
+
+    const tierFor = (b) =>
+        b < 25000 ? "10000-25000" : b < 75000 ? "25000-50000" : "50000-100000";
+
+    const persistAndSync = (budget) => {
+        try { localStorage.setItem(STORAGE_KEY, String(budget)); } catch (e) {}
+        if (contactBudget) contactBudget.value = tierFor(budget);
+    };
+
+    const update = () => {
+        const budget = parseInt(slider.value, 10);
+        budgetVal.textContent = `$${budget.toLocaleString()} / mo`;
+
+        const activeChannels = document.querySelectorAll(".channel-chip[aria-checked='true']");
+        const channelCount = activeChannels.length || 1;
+
+        let roas = 4.2;
+        if (budget >= 50000) roas += 0.4;
+        if (budget >= 100000) roas += 0.4;
+        if (channelCount >= 3) roas += 0.3;
+
+        const projectedMonthly = Math.round(budget * roas);
+        const netAnnual = Math.round((projectedMonthly - budget) * 12);
+        const cacDrop = Math.min(48, 20 + Math.round(channelCount * 5) + (budget >= 50000 ? 10 : 0));
+
+        monthlyRev.textContent = `$${projectedMonthly.toLocaleString()}`;
+        annualNet.textContent = `+$${netAnnual.toLocaleString()}`;
+        roasRange.textContent = `${(roas - 0.3).toFixed(1)}x - ${(roas + 0.5).toFixed(1)}x`;
+        cacReduction.textContent = `-${cacDrop}%`;
+
+        let deliverables = [];
+        if (budget < 25000) {
+            tierBadge.textContent = "Emerging Tier";
+            deliverables = [
+                "Dedicated Growth Strategist & Paid Media Manager",
+                "Bi-weekly Ad Creative Assets & Motion Hooks",
+                "Meta & Google Search Campaign Architecture",
+                "Server-Side CAPI Tracking & Standard Dashboard",
+            ];
+        } else if (budget < 75000) {
+            tierBadge.textContent = "Growth Tier";
+            deliverables = [
+                "Dedicated Growth Pod (Strategist, Media Buyer & Copywriter)",
+                "Weekly Ad Creative Concepts & Motion Graphics",
+                "Multichannel Meta, Google, & TikTok Bidding Systems",
+                "Landing Page CRO Sprints & Server CAPI Attribution",
+                "Bi-weekly Executive Strategy Calls & Real-time Slack",
+            ];
+        } else {
+            tierBadge.textContent = "Enterprise Tier";
+            deliverables = [
+                "Full Embedded Growth Unit (VP Strategist, Creative Director, CRO Lead)",
+                "Unlimited Weekly Ad Creative Sprints (UGC + Motion)",
+                "Programmatic SEO Topical Cluster Infrastructure",
+                "Custom Conversion Landing Page Engineering & A/B Testing",
+                "Real-time Enterprise Attribution OS & 24/7 Slack Channel",
+            ];
+        }
+
+        activeChannels.forEach((chip) => {
+            const ch = chip.getAttribute("data-channel");
+            if (ch === "seo" && !deliverables.includes("Enterprise SEO Topical Authority Strategy"))
+                deliverables.push("Enterprise SEO Topical Authority Strategy");
+            if (ch === "cro" && !deliverables.includes("Conversion Landing Page CRO Optimization"))
+                deliverables.push("Conversion Landing Page CRO Optimization");
         });
 
-        btn.classList.remove("text-slate-600");
-        btn.classList.add("active", "bg-white", "text-slate-900", "shadow-sm");
+        if (deliverablesList) {
+            deliverablesList.innerHTML = deliverables
+                .map(
+                    (item) => `<li class="flex items-center gap-2">
+                        <i data-lucide="check" class="w-4 h-4 text-emerald-400" aria-hidden="true"></i>
+                        <span>${item}</span>
+                    </li>`
+                )
+                .join("");
+            if (window.lucide) lucide.createIcons();
+        }
 
-        const targetTabId = btn.getAttribute("data-tab");
-        const tabContents = parentWidget.querySelectorAll(".case-tab-content");
+        persistAndSync(budget);
+    };
 
-        tabContents.forEach(content => {
-            if (content.id === targetTabId) {
-                content.classList.remove("hidden");
-            } else {
-                content.classList.add("hidden");
+    chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+            const active = chip.getAttribute("aria-checked") === "true";
+            chip.setAttribute("aria-checked", String(!active));
+            chip.classList.toggle("active", !active);
+            update();
+        });
+    });
+
+    slider.addEventListener("input", update);
+
+    // Restore previously selected budget from the estimator.
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            const v = parseInt(saved, 10);
+            if (v >= parseInt(slider.min, 10) && v <= parseInt(slider.max, 10)) {
+                slider.value = v;
             }
-        });
-    });
-});
-
-// Interactive "Estimate Your Growth Campaign" Widget Logic
-const estBudgetSlider = document.getElementById("est-budget-slider");
-const estBudgetVal = document.getElementById("est-budget-val");
-const estMonthlyRev = document.getElementById("est-monthly-rev");
-const estAnnualNet = document.getElementById("est-annual-net");
-const estRoasRange = document.getElementById("est-roas-range");
-const estCacReduction = document.getElementById("est-cac-reduction");
-const deliverablesList = document.getElementById("deliverables-list");
-const tierBadge = document.getElementById("tier-badge");
-const channelChips = document.querySelectorAll(".channel-chip");
-
-// Channel Chips Toggle
-channelChips.forEach(chip => {
-    chip.addEventListener("click", () => {
-        chip.classList.toggle("active");
-        chip.classList.toggle("text-slate-300");
-        updateCampaignEstimate();
-    });
-});
-
-if (estBudgetSlider) {
-    estBudgetSlider.addEventListener("input", updateCampaignEstimate);
-}
-
-function updateCampaignEstimate() {
-    if (!estBudgetSlider) return;
-
-    const budget = parseInt(estBudgetSlider.value);
-    estBudgetVal.textContent = `$${budget.toLocaleString()} / mo`;
-
-    // Active channels count
-    const activeChannels = document.querySelectorAll(".channel-chip.active");
-    const channelCount = activeChannels.length || 1;
-
-    // Calculate ROAS multiplier (Base 4.2x + boost for higher budget & channel synergy)
-    let roasMultiplier = 4.2;
-    if (budget >= 50000) roasMultiplier += 0.4;
-    if (budget >= 100000) roasMultiplier += 0.4;
-    if (channelCount >= 3) roasMultiplier += 0.3;
-
-    const projectedMonthly = Math.round(budget * roasMultiplier);
-    const netAnnualGrowth = Math.round((projectedMonthly - budget) * 12);
-    const cacDrop = Math.min(48, 20 + Math.round(channelCount * 5) + (budget >= 50000 ? 10 : 0));
-
-    estMonthlyRev.textContent = `$${projectedMonthly.toLocaleString()}`;
-    estAnnualNet.textContent = `+$${netAnnualGrowth.toLocaleString()}`;
-    estRoasRange.textContent = `${(roasMultiplier - 0.3).toFixed(1)}x - ${(roasMultiplier + 0.5).toFixed(1)}x`;
-    estCacReduction.textContent = `-${cacDrop}%`;
-
-    // Dynamic Deliverables & Tier Badge based on budget
-    let deliverables = [];
-    if (budget < 25000) {
-        tierBadge.textContent = "Emerging Tier";
-        deliverables = [
-            "Dedicated Growth Strategist & Paid Media Manager",
-            "Bi-weekly Ad Creative Assets & Motion Hooks",
-            "Meta & Google Search Campaign Architecture",
-            "Server-Side CAPI Tracking & Standard Dashboard"
-        ];
-    } else if (budget < 75000) {
-        tierBadge.textContent = "Growth Tier";
-        deliverables = [
-            "Dedicated Growth Pod (Strategist, Media Buyer & Copywriter)",
-            "Weekly Ad Creative Concepts & Motion Graphics",
-            "Multichannel Meta, Google, & TikTok Bidding Systems",
-            "Landing Page CRO Sprints & Server CAPI Attribution",
-            "Bi-weekly Executive Strategy Calls & Real-time Slack"
-        ];
-    } else {
-        tierBadge.textContent = "Enterprise Tier";
-        deliverables = [
-            "Full Embedded Growth Unit (VP Strategist, Creative Director, CRO Lead)",
-            "Unlimited Weekly Ad Creative Sprints (UGC + Motion)",
-            "Programmatic SEO Topical Cluster Infrastructure",
-            "Custom Conversion Landing Page Engineering & A/B Testing",
-            "Real-time Enterprise Attribution OS & 24/7 Slack Channel"
-        ];
-    }
-
-    // Append active channel specific deliverables
-    activeChannels.forEach(chip => {
-        const channel = chip.getAttribute("data-channel");
-        if (channel === "seo" && !deliverables.includes("Enterprise SEO Topical Authority Strategy")) {
-            deliverables.push("Enterprise SEO Topical Authority Strategy");
         }
-        if (channel === "cro" && !deliverables.includes("Conversion Landing Page CRO Optimization")) {
-            deliverables.push("Conversion Landing Page CRO Optimization");
-        }
-    });
+    } catch (e) {}
 
-    if (deliverablesList) {
-        deliverablesList.innerHTML = deliverables.map(item => `
-            <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
-                <span>${item}</span>
-            </li>
-        `).join("");
-        
-        if (window.lucide) {
-            lucide.createIcons();
-        }
-    }
-}
+    update();
 
-// Initial calculation on page load
-updateCampaignEstimate();
-
-// Category Filter for Case Studies
-const filterBtns = document.querySelectorAll(".filter-btn");
-const workCards = document.querySelectorAll(".work-card");
-
-filterBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-        filterBtns.forEach(b => {
-            b.classList.remove("bg-white", "text-slate-900", "shadow-sm");
-            b.classList.add("text-slate-600");
-        });
-        btn.classList.remove("text-slate-600");
-        btn.classList.add("bg-white", "text-slate-900", "shadow-sm");
-
-        const filter = btn.getAttribute("data-filter");
-
-        workCards.forEach(card => {
-            if (filter === "all" || card.getAttribute("data-category") === filter) {
-                card.style.display = "grid";
-            } else {
-                card.style.display = "none";
+    // If the contact form loads with a pre-selected tier, reflect it on the slider.
+    if (contactBudget) {
+        const setFromContact = () => {
+            const val = parseInt(contactBudget.value, 10);
+            if (val) {
+                slider.value = Math.min(
+                    parseInt(slider.max, 10),
+                    Math.max(parseInt(slider.min, 10), val)
+                );
+                update();
             }
+        };
+        contactBudget.addEventListener("change", setFromContact);
+    }
+}
+
+/* ----------------------------------------------------------------
+ * Case study category filter (active state + aria-pressed)
+ * ---------------------------------------------------------------- */
+function initFilters() {
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const workCards = document.querySelectorAll(".work-card");
+
+    filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            filterBtns.forEach((b) => {
+                const selected = b === btn;
+                b.classList.toggle("bg-white", selected);
+                b.classList.toggle("text-slate-900", selected);
+                b.classList.toggle("shadow-sm", selected);
+                b.classList.toggle("text-slate-600", !selected);
+                b.setAttribute("aria-pressed", String(selected));
+            });
+
+            const filter = btn.getAttribute("data-filter");
+            workCards.forEach((card) => {
+                const show = filter === "all" || card.getAttribute("data-category") === filter;
+                card.style.display = show ? "grid" : "none";
+            });
         });
     });
-});
+}
 
-// Contact Form Handler
-const contactForm = document.getElementById("contact-form");
-const formSuccess = document.getElementById("form-success");
+/* ----------------------------------------------------------------
+ * FAQ accordion
+ * ---------------------------------------------------------------- */
+function initFaq() {
+    const toggles = document.querySelectorAll(".faq-toggle");
+    toggles.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const expanded = btn.getAttribute("aria-expanded") === "true";
+            const panel = document.getElementById(btn.getAttribute("aria-controls"));
+            const icon = btn.querySelector(".faq-icon");
+            btn.setAttribute("aria-expanded", String(!expanded));
+            if (panel) panel.classList.toggle("hidden", expanded);
+            if (icon) icon.style.transform = expanded ? "" : "rotate(180deg)";
+        });
+    });
+}
 
-if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
+/* ----------------------------------------------------------------
+ * Contact form: inline validation + honeypot + success state
+ * ---------------------------------------------------------------- */
+function initContactForm() {
+    const form = document.getElementById("contact-form");
+    const success = document.getElementById("form-success");
+    if (!form) return;
+
+    const honeypot = document.getElementById("b_honeypot");
+    const fields = {
+        name: document.getElementById("cf-name"),
+        email: document.getElementById("cf-email"),
+        message: document.getElementById("cf-message"),
+    };
+    const errors = {
+        name: document.getElementById("cf-name-error"),
+        email: document.getElementById("cf-email-error"),
+        message: document.getElementById("cf-message-error"),
+    };
+
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const validateField = (key) => {
+        const el = fields[key];
+        const err = errors[key];
+        let msg = "";
+        if (key === "name" && !el.value.trim()) msg = "Please enter your name.";
+        if (key === "email") {
+            if (!el.value.trim()) msg = "Please enter your work email.";
+            else if (!emailRe.test(el.value.trim())) msg = "Please enter a valid email address.";
+        }
+        if (msg) {
+            err.textContent = msg;
+            err.classList.remove("hidden");
+            el.setAttribute("aria-invalid", "true");
+            return false;
+        }
+        err.textContent = "";
+        err.classList.add("hidden");
+        el.removeAttribute("aria-invalid");
+        return true;
+    };
+
+    Object.keys(fields).forEach((key) => {
+        fields[key].addEventListener("blur", () => validateField(key));
+        fields[key].addEventListener("input", () => {
+            if (fields[key].getAttribute("aria-invalid") === "true") validateField(key);
+        });
+    });
+
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
-        contactForm.classList.add("hidden");
-        formSuccess.classList.remove("hidden");
+
+        // Honeypot: silently reject bot submissions.
+        if (honeypot && honeypot.value.trim() !== "") return;
+
+        const results = [validateField("name"), validateField("email")];
+        if (results.includes(false)) {
+            const firstInvalid = Object.values(fields).find(
+                (el) => el.getAttribute("aria-invalid") === "true"
+            );
+            if (firstInvalid) firstInvalid.focus();
+            return;
+        }
+
+        form.classList.add("hidden");
+        if (success) success.classList.remove("hidden");
+    });
+}
+
+/* ----------------------------------------------------------------
+ * Scroll-spy: highlight active nav link
+ * ---------------------------------------------------------------- */
+function initScrollSpy() {
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    const ids = Array.from(navLinks)
+        .map((a) => a.getAttribute("href").slice(1))
+        .filter(Boolean);
+    const sections = ids
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+    if (sections.length === 0 || !("IntersectionObserver" in window)) return;
+
+    const linkFor = (id) =>
+        document.querySelector(`nav a[href="#${id}"]`);
+
+    const obs = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                navLinks.forEach((l) =>
+                    l.classList.remove("text-indigo-600", "font-bold")
+                );
+                const link = linkFor(entry.target.id);
+                if (link) link.classList.add("text-indigo-600", "font-bold");
+            });
+        },
+        { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+
+    sections.forEach((s) => obs.observe(s));
+}
+
+/* ----------------------------------------------------------------
+ * Smooth-scroll polyfill for Safari < 15.4
+ * ---------------------------------------------------------------- */
+function initSmoothScrollPolyfill() {
+    const supportsSmooth = window.CSS && CSS.supports("scroll-behavior", "smooth");
+    if (supportsSmooth) return;
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (e) => {
+            const id = link.getAttribute("href").slice(1);
+            if (!id) return;
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({ top, behavior: "smooth" });
+        });
     });
 }

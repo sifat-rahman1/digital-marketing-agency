@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEBULA | Growth & Performance Agency</title>
+    <meta name="description" content="NEBULA — Premium growth & performance agency. Predictable revenue scale for category leaders through paid media, SEO, social, and CRO. Book a strategy consultation.">
+    <meta name="theme-color" content="#4338ca">
+    <link rel="canonical" href="https://nebula-agency.com/">
     
-    <!-- Clean Google Font -->
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nebula-agency.com/">
+    <meta property="og:title" content="NEBULA | Growth & Performance Agency">
+    <meta property="og:description" content="Predictable revenue scale for category leaders. Integrated paid media, enterprise SEO, social virality, and conversion-engineered creative.">
+    <meta property="og:image" content="https://nebula-agency.com/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NEBULA | Growth & Performance Agency">
+    <meta name="twitter:description" content="Predictable revenue scale for category leaders. Book a strategy consultation.">
+    <meta name="twitter:image" content="https://nebula-agency.com/og-image.jpg">
+    
+    <!-- Clean Google Font with font-display:swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,7 +39,7 @@
                         brand: {
                             light: '#f8fafc',
                             card: '#ffffff',
-                            primary: '#4f46e5',
+                            primary: '#4338ca',
                             sky: '#0284c7',
                             emerald: '#10b981'
                         }
@@ -32,6 +47,97 @@
                 }
             }
         }
+    </script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "NEBULA Growth Agency",
+        "url": "https://nebula-agency.com/",
+        "logo": "https://nebula-agency.com/logo.svg",
+        "sameAs": [
+            "https://twitter.com/nebulaagency",
+            "https://linkedin.com/company/nebulaagency"
+        ],
+        "description": "Premium growth & performance agency delivering predictable revenue scale for category leaders."
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Digital Marketing",
+        "name": "Paid Acquisition Engineering",
+        "provider": {
+            "@type": "Organization",
+            "name": "NEBULA Growth Agency"
+        },
+        "description": "Multichannel paid acquisition across Google, Meta, TikTok, and LinkedIn with algorithmic bidding and server-side CAPI tracking.",
+        "areaServed": "Global"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "SEO",
+        "name": "Enterprise SEO & Topical Authority",
+        "provider": {
+            "@type": "Organization",
+            "name": "NEBULA Growth Agency"
+        },
+        "description": "Technical infrastructure, topic cluster architecture, and authoritative link acquisition for high-intent search dominance.",
+        "areaServed": "Global"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Social Media Marketing",
+        "name": "Short-Form Social & Creator Virality",
+        "provider": {
+            "@type": "Organization",
+            "name": "NEBULA Growth Agency"
+        },
+        "description": "High-velocity short-form video production, creator partnerships, and distribution systems built for customer acquisition.",
+        "areaServed": "Global"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Conversion Rate Optimization",
+        "name": "Creative Direction & Landing Page CRO",
+        "provider": {
+            "@type": "Organization",
+            "name": "NEBULA Growth Agency"
+        },
+        "description": "Conversion-engineered landing pages and ad creative concepts that convert traffic into revenue with minimal friction.",
+        "areaServed": "Global"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AggregateRating",
+        "itemReviewed": {
+            "@type": "Organization",
+            "name": "NEBULA Growth Agency"
+        },
+        "ratingValue": "5.0",
+        "reviewCount": "3",
+        "bestRating": "5",
+        "worstRating": "1"
+    }
     </script>
     
     <style>
@@ -55,6 +161,26 @@
                 linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
         }
+        
+        /* Reduced Motion - Disable animations for users with vestibular sensitivities */
+        @media (prefers-reduced-motion: reduce) {
+            .animate-float,
+            .neon-node,
+            .hero-visual-card,
+            .hover-lift {
+                animation: none !important;
+                transition: none !important;
+            }
+            .hero-visual-card:hover,
+            .hover-lift:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+            [data-counter] {
+                animation: none !important;
+            }
+        }
+        
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -67,7 +193,7 @@
         }
         .hero-visual-card:hover {
             transform: translateY(-8px) scale(1.015);
-            box-shadow: 0 30px 60px -15px rgba(79, 70, 229, 0.2);
+            box-shadow: 0 30px 60px -15px rgba(67, 56, 202, 0.2);
         }
         .hover-lift {
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -78,22 +204,34 @@
         }
         /* Custom channel checkbox style */
         .channel-chip.active {
-            background-color: #4f46e5;
+            background-color: #4338ca;
             color: #ffffff;
-            border-color: #4f46e5;
+            border-color: #4338ca;
         }
         /* Glowing Gradient Borders on key CTA Buttons */
         .glow-cta-btn {
             position: relative;
-            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+            background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);
             border: 1px solid rgba(199, 210, 254, 0.6);
-            box-shadow: 0 0 20px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 0 20px rgba(67, 56, 202, 0.35);
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .glow-cta-btn:hover {
-            box-shadow: 0 0 35px rgba(79, 70, 229, 0.6), 0 0 15px rgba(2, 132, 199, 0.4);
+            box-shadow: 0 0 35px rgba(67, 56, 202, 0.6), 0 0 15px rgba(2, 132, 199, 0.4);
             border-color: #a5b4fc;
             transform: translateY(-2px);
+        }
+        /* Focus visible styles for accessibility */
+        .focus-visible-ring:focus-visible,
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: none !important;
+            ring: 2px !important;
+            ring-offset: 2px !important;
+            ring-color: #4338ca !important;
         }
         /* Neon Grid Nodes */
         .neon-node {
@@ -114,44 +252,47 @@
 <body class="overflow-x-hidden text-slate-900 bg-[#f8fafc] selection:bg-indigo-600 selection:text-white grid-bg">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 light-nav transition-all duration-300">
+    <nav class="fixed top-0 left-0 w-full z-50 light-nav transition-all duration-300" role="navigation" aria-label="Main navigation">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" class="text-2xl font-extrabold tracking-tight flex items-center gap-2.5 text-slate-900">
-                <span class="w-3.5 h-3.5 rounded-full bg-indigo-600 shadow-sm shadow-indigo-400"></span>
+            <a href="#" class="text-2xl font-extrabold tracking-tight flex items-center gap-2.5 text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md" aria-label="NEBULA Home">
+                <span class="w-3.5 h-3.5 rounded-full bg-indigo-600 shadow-sm shadow-indigo-400" aria-hidden="true"></span>
                 NEBULA<span class="text-indigo-600">.</span>
             </a>
             
-            <div class="hidden md:flex items-center gap-10 text-sm font-semibold text-slate-600">
-                <a href="#services" class="hover:text-indigo-600 transition">Capabilities</a>
-                <a href="#work" class="hover:text-indigo-600 transition">Case Studies</a>
-                <a href="#estimator" class="hover:text-indigo-600 transition">Campaign Estimator</a>
-                <a href="#process" class="hover:text-indigo-600 transition">Methodology</a>
+            <div class="hidden md:flex items-center gap-10 text-sm font-semibold text-slate-600" role="menubar">
+                <a href="#services" class="hover:text-indigo-600 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-2 py-1" role="menuitem">Capabilities</a>
+                <a href="#work" class="hover:text-indigo-600 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-2 py-1" role="menuitem">Case Studies</a>
+                <a href="#estimator" class="hover:text-indigo-600 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-2 py-1" role="menuitem">Campaign Estimator</a>
+                <a href="#process" class="hover:text-indigo-600 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-2 py-1" role="menuitem">Methodology</a>
             </div>
 
-            <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-indigo-600 transition-all duration-300 shadow-sm">
+            <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full glow-cta-btn text-white font-semibold text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" role="menuitem">
                 <span>Start Project</span>
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i>
             </a>
 
-            <button id="menu-btn" class="md:hidden text-slate-900">
-                <i data-lucide="menu" class="w-6 h-6"></i>
+            <button id="menu-btn" class="md:hidden text-slate-900 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-lg" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+                <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
             </button>
         </div>
     </nav>
 
     <!-- Mobile Menu Drawer -->
-    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-2xl z-40 hidden flex-col justify-center items-center gap-8 text-2xl font-bold text-slate-900">
-        <a href="#services" class="mobile-link">Capabilities</a>
-        <a href="#work" class="mobile-link">Case Studies</a>
-        <a href="#estimator" class="mobile-link">Campaign Estimator</a>
-        <a href="#process" class="mobile-link">Methodology</a>
-        <a href="#contact" class="px-8 py-3 rounded-full bg-indigo-600 text-white text-lg">Start Project</a>
+    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-2xl z-40 hidden flex-col justify-center items-center gap-8 text-2xl font-bold text-slate-900" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
+        <a href="#services" class="mobile-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-4 py-2">Capabilities</a>
+        <a href="#work" class="mobile-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-4 py-2">Case Studies</a>
+        <a href="#estimator" class="mobile-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-4 py-2">Campaign Estimator</a>
+        <a href="#process" class="mobile-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-4 py-2">Methodology</a>
+        <a href="#contact" class="px-8 py-3 rounded-full glow-cta-btn text-white text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">Start Project</a>
     </div>
 
+    <!-- Main Content Landmark -->
+    <main id="main-content" class="pt-20">
+
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-6 overflow-hidden">
+    <section id="hero" class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-6 overflow-hidden" style="scroll-margin-top: 80px;" aria-labelledby="hero-heading">
         <!-- Glowing Neon Grid Nodes -->
-        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
             <div class="neon-node top-36 left-12" style="animation-delay: 0s;"></div>
             <div class="neon-node top-48 right-24" style="animation-delay: 1.2s;"></div>
             <div class="neon-node bottom-28 left-1/3" style="animation-delay: 2.4s;"></div>
@@ -163,24 +304,24 @@
             <!-- Hero Left Column -->
             <div class="lg:col-span-7 space-y-8">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-200 bg-indigo-50/80 text-xs font-bold tracking-wide uppercase text-indigo-700">
-                    <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+                    <span class="w-2 h-2 rounded-full bg-indigo-600" aria-hidden="true"></span>
                     Performance Growth Agency
                 </div>
                 
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight text-slate-900">
+                <h1 id="hero-heading" class="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight text-slate-900">
                     Predictable revenue scale for <span class="gradient-text-light">category leaders.</span>
                 </h1>
                 
                 <p class="text-lg md:text-xl text-slate-600 font-normal max-w-2xl leading-relaxed">
-                    We build customer acquisition engines that blend performance paid media, enterprise search authority, and conversion-engineered creative.
+                    We replace guesswork with engineered growth systems — paid media, enterprise SEO, short-form creative, and CRO — delivering measurable revenue lift for brands at $10M–$100M+ ARR.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
-                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full glow-cta-btn text-white font-semibold text-base flex items-center justify-center gap-3">
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full glow-cta-btn text-white font-semibold text-base flex items-center justify-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
                         <span>Book Strategy Consultation</span>
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        <i data-lucide="arrow-right" class="w-5 h-5" aria-hidden="true"></i>
                     </a>
-                    <a href="#estimator" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold text-base hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-2">
+                    <a href="#estimator" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold text-base hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
                         <span>Estimate Your Campaign</span>
                     </a>
                 </div>
@@ -188,11 +329,11 @@
                 <!-- Proof Bar -->
                 <div class="pt-6 flex items-center gap-6 text-sm text-slate-500 font-medium border-t border-slate-200/80">
                     <div class="flex items-center gap-2">
-                        <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i>
+                        <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600" aria-hidden="true"></i>
                         <span><strong data-counter="145" data-prefix="$" data-suffix="M+">$145M+</strong> Revenue Generated</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <i data-lucide="trending-up" class="w-5 h-5 text-emerald-600"></i>
+                        <i data-lucide="trending-up" class="w-5 h-5 text-emerald-600" aria-hidden="true"></i>
                         <span><strong data-counter="4.8" data-suffix="x">4.8x</strong> Average Blended ROAS</span>
                     </div>
                 </div>
@@ -200,12 +341,12 @@
 
             <!-- Hero Right Dashboard Visual Spotlight -->
             <div class="lg:col-span-5 relative animate-float">
-                <div class="relative w-full rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 space-y-5 hero-visual-card cursor-pointer">
+                <div class="relative w-full rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 space-y-5 hero-visual-card cursor-pointer" tabindex="0" role="img" aria-label="NEBULA Growth Dashboard showing quarterly revenue run-rate of $4.82M, 314% scale, and acquisition efficiency trends">
                     <div class="flex items-center justify-between pb-4 border-b border-slate-100">
                         <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-rose-400"></span>
-                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
-                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-rose-400" aria-hidden="true"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400" aria-hidden="true"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400" aria-hidden="true"></span>
                             <span class="text-xs font-bold text-slate-400 ml-2">NEBULA Growth Dashboard</span>
                         </div>
                         <span class="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold">
@@ -230,12 +371,12 @@
                                 <span>Acquisition Efficiency Trend</span>
                                 <span>Target CAC Efficiency</span>
                             </div>
-                            <div class="h-20 flex items-end justify-between gap-2">
-                                <div class="w-full bg-indigo-500/30 rounded-t-md h-[40%] hover:bg-indigo-400 transition-all duration-300"></div>
-                                <div class="w-full bg-indigo-500/50 rounded-t-md h-[55%] hover:bg-indigo-400 transition-all duration-300"></div>
-                                <div class="w-full bg-indigo-500/70 rounded-t-md h-[72%] hover:bg-indigo-400 transition-all duration-300"></div>
-                                <div class="w-full bg-indigo-500/90 rounded-t-md h-[88%] hover:bg-indigo-400 transition-all duration-300"></div>
-                                <div class="w-full bg-indigo-500 rounded-t-md h-[100%] hover:bg-indigo-400 shadow-lg shadow-indigo-500/50 transition-all duration-300"></div>
+                            <div class="h-20 flex items-end justify-between gap-2" role="img" aria-label="Bar chart showing acquisition efficiency trend improving from 40% to 100% over 5 periods">
+                                <div class="w-full bg-indigo-500/30 rounded-t-md h-[40%] hover:bg-indigo-400 transition-all duration-300" tabindex="0" aria-label="Period 1: 40% efficiency"></div>
+                                <div class="w-full bg-indigo-500/50 rounded-t-md h-[55%] hover:bg-indigo-400 transition-all duration-300" tabindex="0" aria-label="Period 2: 55% efficiency"></div>
+                                <div class="w-full bg-indigo-500/70 rounded-t-md h-[72%] hover:bg-indigo-400 transition-all duration-300" tabindex="0" aria-label="Period 3: 72% efficiency"></div>
+                                <div class="w-full bg-indigo-500/90 rounded-t-md h-[88%] hover:bg-indigo-400 transition-all duration-300" tabindex="0" aria-label="Period 4: 88% efficiency"></div>
+                                <div class="w-full bg-indigo-500 rounded-t-md h-[100%] hover:bg-indigo-400 shadow-lg shadow-indigo-500/50 transition-all duration-300" tabindex="0" aria-label="Period 5: 100% target efficiency"></div>
                             </div>
                         </div>
                     </div>
@@ -310,7 +451,7 @@
     </section>
 
     <!-- Section 01 / CAPABILITIES -->
-    <section id="services" class="py-28 px-6 bg-white border-y border-slate-200">
+    <section id="services" class="py-28 px-6 bg-white border-y border-slate-200" style="scroll-margin-top: 80px;" aria-labelledby="services-heading">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-3 text-indigo-600 text-xs font-bold uppercase tracking-widest mb-3">
                 <span>01</span>
@@ -320,7 +461,7 @@
             
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16 items-end">
                 <div class="lg:col-span-7">
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                    <h2 id="services-heading" class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
                         An integrated growth stack built for sustainable profitability.
                     </h2>
                 </div>
@@ -427,7 +568,7 @@
     </section>
 
     <!-- Section 02 / CASE STUDIES (Storytelling Editorial Campaign Format + Hover/Tab Visual Dashboards & Ad Creatives) -->
-    <section id="work" class="py-28 px-6">
+    <section id="work" class="py-28 px-6" style="scroll-margin-top: 80px;" aria-labelledby="work-heading">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-3 text-sky-600 text-xs font-bold uppercase tracking-widest mb-3">
                 <span>02</span>
@@ -437,12 +578,12 @@
 
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
                 <div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Campaign Case Studies</h2>
+                    <h2 id="work-heading" class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Campaign Case Studies</h2>
                 </div>
-                <div class="flex gap-2 p-1 bg-slate-200/70 rounded-full text-xs font-bold">
-                    <button class="filter-btn px-5 py-2 rounded-full bg-white text-slate-900 shadow-sm" data-filter="all">All Campaigns</button>
-                    <button class="filter-btn px-5 py-2 rounded-full text-slate-600 hover:text-slate-900" data-filter="ecom">E-Commerce</button>
-                    <button class="filter-btn px-5 py-2 rounded-full text-slate-600 hover:text-slate-900" data-filter="saas">SaaS & B2B</button>
+                <div class="flex gap-2 p-1 bg-slate-200/70 rounded-full text-xs font-bold" role="group" aria-label="Filter case studies by category">
+                    <button class="filter-btn px-5 py-2 rounded-full bg-white text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" data-filter="all" aria-pressed="true">All Campaigns</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-slate-600 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" data-filter="ecom" aria-pressed="false">E-Commerce</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-slate-600 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" data-filter="saas" aria-pressed="false">SaaS & B2B</button>
                 </div>
             </div>
 
@@ -486,14 +627,14 @@
 
                     <!-- Interactive Campaign View Widget (Before/After Chart, Ad Creative Mockup, Live Analytics) -->
                     <div class="lg:col-span-5 space-y-4">
-                        <div class="flex items-center justify-between bg-slate-100 p-1.5 rounded-2xl text-xs font-bold">
-                            <button class="case-tab-btn active px-4 py-2 rounded-xl bg-white text-slate-900 shadow-sm" data-tab="analytics-1">Before & After</button>
-                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900" data-tab="ad-creative-1">Simulated Ad</button>
-                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900" data-tab="audit-1">Live Audit</button>
+                        <div class="flex items-center justify-between bg-slate-100 p-1.5 rounded-2xl text-xs font-bold" role="tablist" aria-label="LuxeLiving Home campaign views">
+                            <button class="case-tab-btn active px-4 py-2 rounded-xl bg-white text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" role="tab" aria-selected="true" aria-controls="analytics-1" id="tab-analytics-1" data-tab="analytics-1">Before & After</button>
+                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" role="tab" aria-selected="false" aria-controls="ad-creative-1" id="tab-ad-creative-1" data-tab="ad-creative-1">Simulated Ad</button>
+                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" role="tab" aria-selected="false" aria-controls="audit-1" id="tab-audit-1" data-tab="audit-1">Live Audit</button>
                         </div>
 
                         <!-- Tab 1 View: Before & After Conversion Chart -->
-                        <div id="analytics-1" class="case-tab-content bg-slate-900 text-white rounded-2xl p-6 space-y-4">
+                        <div id="analytics-1" class="case-tab-content bg-slate-900 text-white rounded-2xl p-6 space-y-4" role="tabpanel" aria-labelledby="tab-analytics-1" tabindex="0">
                             <div class="flex justify-between items-center text-xs font-bold text-indigo-200">
                                 <span>Conversion Funnel Optimization</span>
                                 <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300">CVR +200%</span>
@@ -504,7 +645,7 @@
                                         <span>Legacy Funnel Conversion (1.4%)</span>
                                         <span>$52 CAC</span>
                                     </div>
-                                    <div class="w-full bg-slate-800 rounded-full h-3">
+                                    <div class="w-full bg-slate-800 rounded-full h-3" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="Legacy funnel conversion rate 30%">
                                         <div class="bg-slate-600 h-full w-[30%] rounded-full"></div>
                                     </div>
                                 </div>
@@ -513,7 +654,7 @@
                                         <span>NEBULA Optimized Funnel (4.2%)</span>
                                         <span class="text-emerald-400">$32.40 CAC</span>
                                     </div>
-                                    <div class="w-full bg-slate-800 rounded-full h-3">
+                                    <div class="w-full bg-slate-800 rounded-full h-3" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="NEBULA optimized funnel conversion rate 90%">
                                         <div class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full w-[90%] rounded-full"></div>
                                     </div>
                                 </div>
@@ -521,9 +662,9 @@
                         </div>
 
                         <!-- Tab 2 View: Simulated Ad Creative -->
-                        <div id="ad-creative-1" class="case-tab-content hidden bg-white border border-slate-200 rounded-2xl p-5 space-y-3 shadow-md">
+                        <div id="ad-creative-1" class="case-tab-content hidden bg-white border border-slate-200 rounded-2xl p-5 space-y-3 shadow-md" role="tabpanel" aria-labelledby="tab-ad-creative-1" tabindex="0">
                             <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold flex items-center justify-center text-xs">LL</div>
+                                <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold flex items-center justify-center text-xs" aria-hidden="true">LL</div>
                                 <div>
                                     <div class="text-xs font-bold text-slate-900">LuxeLiving Home</div>
                                     <div class="text-[10px] text-slate-400">Sponsored • Meta Ad Creative</div>
@@ -543,7 +684,7 @@
                         </div>
 
                         <!-- Tab 3 View: Live Audit -->
-                        <div id="audit-1" class="case-tab-content hidden bg-slate-900 text-white rounded-2xl p-6 space-y-3">
+                        <div id="audit-1" class="case-tab-content hidden bg-slate-900 text-white rounded-2xl p-6 space-y-3" role="tabpanel" aria-labelledby="tab-audit-1" tabindex="0">
                             <div class="flex justify-between items-center text-xs font-bold text-slate-400">
                                 <span>Quarterly Attribution Report</span>
                                 <span class="text-indigo-400">Verified</span>
@@ -600,14 +741,14 @@
 
                     <!-- Interactive Campaign View Widget -->
                     <div class="lg:col-span-5 space-y-4">
-                        <div class="flex items-center justify-between bg-slate-100 p-1.5 rounded-2xl text-xs font-bold">
-                            <button class="case-tab-btn active px-4 py-2 rounded-xl bg-white text-slate-900 shadow-sm" data-tab="analytics-2">Organic Growth</button>
-                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900" data-tab="ad-creative-2">Search Creative</button>
-                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900" data-tab="audit-2">SQL Funnel</button>
+                        <div class="flex items-center justify-between bg-slate-100 p-1.5 rounded-2xl text-xs font-bold" role="tablist" aria-label="FlowMetrics AI campaign views">
+                            <button class="case-tab-btn active px-4 py-2 rounded-xl bg-white text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" role="tab" aria-selected="true" aria-controls="analytics-2" id="tab-analytics-2" data-tab="analytics-2">Organic Growth</button>
+                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" role="tab" aria-selected="false" aria-controls="ad-creative-2" id="tab-ad-creative-2" data-tab="ad-creative-2">Search Creative</button>
+                            <button class="case-tab-btn px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" role="tab" aria-selected="false" aria-controls="audit-2" id="tab-audit-2" data-tab="audit-2">SQL Funnel</button>
                         </div>
 
                         <!-- Tab 1 View: Organic Growth Chart -->
-                        <div id="analytics-2" class="case-tab-content bg-slate-900 text-white rounded-2xl p-6 space-y-4">
+                        <div id="analytics-2" class="case-tab-content bg-slate-900 text-white rounded-2xl p-6 space-y-4" role="tabpanel" aria-labelledby="tab-analytics-2" tabindex="0">
                             <div class="flex justify-between items-center text-xs font-bold text-sky-200">
                                 <span>Organic Search Traffic Scaling</span>
                                 <span class="px-2.5 py-1 rounded bg-sky-500/20 text-sky-300">1.4M Organic Visits</span>
@@ -617,14 +758,14 @@
                                     <span>Search Keyword Position #1-3 Terms</span>
                                     <span class="text-sky-400 font-bold">840 Ranking Terms</span>
                                 </div>
-                                <div class="w-full bg-slate-800 rounded-full h-3">
+                                <div class="w-full bg-slate-800 rounded-full h-3" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Search keyword position 1-3 terms 95%">
                                     <div class="bg-gradient-to-r from-sky-500 to-indigo-400 h-full w-[95%] rounded-full"></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Tab 2 View: Search Creative Mockup -->
-                        <div id="ad-creative-2" class="case-tab-content hidden bg-white border border-slate-200 rounded-2xl p-5 space-y-3 shadow-md">
+                        <div id="ad-creative-2" class="case-tab-content hidden bg-white border border-slate-200 rounded-2xl p-5 space-y-3 shadow-md" role="tabpanel" aria-labelledby="tab-ad-creative-2" tabindex="0">
                             <div class="text-[10px] text-slate-400 font-bold uppercase">High-Intent Google Search Ad</div>
                             <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
                                 <div class="text-xs text-sky-600 font-bold">Ad • flowmetrics.ai/enterprise-analytics</div>
@@ -638,7 +779,7 @@
                         </div>
 
                         <!-- Tab 3 View: SQL Funnel -->
-                        <div id="audit-2" class="case-tab-content hidden bg-slate-900 text-white rounded-2xl p-6 space-y-3">
+                        <div id="audit-2" class="case-tab-content hidden bg-slate-900 text-white rounded-2xl p-6 space-y-3" role="tabpanel" aria-labelledby="tab-audit-2" tabindex="0">
                             <div class="flex justify-between items-center text-xs font-bold text-slate-400">
                                 <span>Sales Qualified Lead Pipeline</span>
                                 <span class="text-emerald-400">Verified</span>
@@ -662,7 +803,7 @@
     </section>
 
     <!-- Section 03 / INTERACTIVE CAMPAIGN ESTIMATOR WIDGET -->
-    <section id="estimator" class="py-28 px-6 bg-slate-900 text-white relative overflow-hidden">
+    <section id="estimator" class="py-28 px-6 bg-slate-900 text-white relative overflow-hidden" style="scroll-margin-top: 80px;" aria-labelledby="estimator-heading">
         <div class="max-w-7xl mx-auto relative z-10">
             
             <div class="flex items-center gap-3 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-3">
@@ -672,7 +813,7 @@
             </div>
 
             <div class="max-w-3xl mb-16 space-y-4">
-                <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                <h2 id="estimator-heading" class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
                     Estimate Your Growth Campaign
                 </h2>
                 <p class="text-slate-300 text-lg leading-relaxed">
@@ -703,21 +844,21 @@
                     <!-- Input 2: Channel Selector Chips -->
                     <div class="space-y-3 pt-4 border-t border-white/10">
                         <label class="text-xs font-bold uppercase tracking-wider text-slate-300 block">Select Target Channels & Disciplines</label>
-                        <div class="flex flex-wrap gap-3">
-                            <button class="channel-chip active px-4 py-2.5 rounded-full border border-white/20 text-xs font-bold transition flex items-center gap-2" data-channel="meta">
-                                <i data-lucide="zap" class="w-3.5 h-3.5"></i> Meta Ads (FB & IG)
+                        <div class="flex flex-wrap gap-3" role="group" aria-label="Select target channels and disciplines">
+                            <button class="channel-chip active px-4 py-2.5 rounded-full border border-white/20 text-xs font-bold transition flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" role="switch" aria-checked="true" data-channel="meta">
+                                <i data-lucide="zap" class="w-3.5 h-3.5" aria-hidden="true"></i> Meta Ads (FB & IG)
                             </button>
-                            <button class="channel-chip active px-4 py-2.5 rounded-full border border-white/20 text-xs font-bold transition flex items-center gap-2" data-channel="google">
-                                <i data-lucide="search" class="w-3.5 h-3.5"></i> Google Search & Intent
+                            <button class="channel-chip active px-4 py-2.5 rounded-full border border-white/20 text-xs font-bold transition flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" role="switch" aria-checked="true" data-channel="google">
+                                <i data-lucide="search" class="w-3.5 h-3.5" aria-hidden="true"></i> Google Search & Intent
                             </button>
-                            <button class="channel-chip active px-4 py-2.5 rounded-full border border-white/20 text-xs font-bold transition flex items-center gap-2" data-channel="tiktok">
-                                <i data-lucide="share-2" class="w-3.5 h-3.5"></i> TikTok & Short-Form
+                            <button class="channel-chip active px-4 py-2.5 rounded-full border border-white/20 text-xs font-bold transition flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" role="switch" aria-checked="true" data-channel="tiktok">
+                                <i data-lucide="share-2" class="w-3.5 h-3.5" aria-hidden="true"></i> TikTok & Short-Form
                             </button>
-                            <button class="channel-chip px-4 py-2.5 rounded-full border border-white/20 text-slate-300 text-xs font-bold transition flex items-center gap-2" data-channel="seo">
-                                <i data-lucide="bar-chart-3" class="w-3.5 h-3.5"></i> Technical SEO Engine
+                            <button class="channel-chip px-4 py-2.5 rounded-full border border-white/20 text-slate-300 text-xs font-bold transition flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" role="switch" aria-checked="false" data-channel="seo">
+                                <i data-lucide="bar-chart-3" class="w-3.5 h-3.5" aria-hidden="true"></i> Technical SEO Engine
                             </button>
-                            <button class="channel-chip px-4 py-2.5 rounded-full border border-white/20 text-slate-300 text-xs font-bold transition flex items-center gap-2" data-channel="cro">
-                                <i data-lucide="compass" class="w-3.5 h-3.5"></i> Landing Page CRO
+                            <button class="channel-chip px-4 py-2.5 rounded-full border border-white/20 text-slate-300 text-xs font-bold transition flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" role="switch" aria-checked="false" data-channel="cro">
+                                <i data-lucide="compass" class="w-3.5 h-3.5" aria-hidden="true"></i> Landing Page CRO
                             </button>
                         </div>
                     </div>
@@ -769,7 +910,7 @@
                         </div>
                     </div>
 
-                    <a href="#contact" class="w-full py-4 rounded-2xl glow-cta-btn text-white font-bold text-center block">
+                    <a href="#contact" class="w-full py-4 rounded-2xl glow-cta-btn text-white font-bold text-center block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
                         Schedule Growth Consultation
                     </a>
                 </div>
@@ -779,7 +920,7 @@
     </section>
 
     <!-- Section 04 / METHODOLOGY -->
-    <section id="process" class="py-28 px-6 bg-white border-b border-slate-200">
+    <section id="process" class="py-28 px-6 bg-white border-b border-slate-200" style="scroll-margin-top: 80px;" aria-labelledby="process-heading">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-3 text-indigo-600 text-xs font-bold uppercase tracking-widest mb-3">
                 <span>04</span>
@@ -789,7 +930,7 @@
 
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
                 <div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Our 4-Phase Growth Framework</h2>
+                    <h2 id="process-heading" class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Our 4-Phase Growth Framework</h2>
                 </div>
                 <p class="text-slate-600 max-w-md font-medium text-base">
                     Every partnership begins with deep unit economics analysis and ends with predictable, compounding market share.
@@ -865,7 +1006,7 @@
     </section>
 
     <!-- Section 05 / TESTIMONIALS -->
-    <section class="py-28 px-6">
+    <section id="testimonials" class="py-28 px-6" style="scroll-margin-top: 80px;" aria-labelledby="testimonials-heading">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-3 text-sky-600 text-xs font-bold uppercase tracking-widest mb-3">
                 <span>05</span>
@@ -875,7 +1016,7 @@
 
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
                 <div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Direct feedback from partner executives</h2>
+                    <h2 id="testimonials-heading" class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Direct feedback from partner executives</h2>
                 </div>
                 <div class="text-xs font-bold text-slate-500 uppercase">Verified 100% Client Retention Rate</div>
             </div>
@@ -948,43 +1089,106 @@
         </div>
     </section>
 
+    <!-- Section 05b / FAQ -->
+    <section id="faq" class="py-28 px-6 bg-white border-y border-slate-200" style="scroll-margin-top: 80px;" aria-labelledby="faq-heading">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center gap-3 text-indigo-600 text-xs font-bold uppercase tracking-widest mb-3">
+                <span>FAQ</span>
+                <span class="w-8 h-px bg-indigo-600"></span>
+                <span>Client Questions</span>
+            </div>
+            <h2 id="faq-heading" class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-12">Answers to common objections</h2>
+
+            <div class="space-y-4" id="faq-list">
+                <div class="faq-item border border-slate-200 rounded-2xl overflow-hidden">
+                    <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" aria-expanded="false" aria-controls="faq-p1">
+                        <span class="font-bold text-slate-900 text-base">What does a typical engagement cost?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-600 transition-transform faq-icon" aria-hidden="true"></i>
+                    </button>
+                    <div id="faq-p1" class="faq-panel hidden px-6 pb-6 text-slate-600 leading-relaxed">
+                        Engagements start at $10,000/month and scale with ambition. Most growth-stage partners invest $25K–$100K+ per month across paid media, SEO, and creative. Your exact investment is scoped after a free audit of your unit economics.
+                    </div>
+                </div>
+
+                <div class="faq-item border border-slate-200 rounded-2xl overflow-hidden">
+                    <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" aria-expanded="false" aria-controls="faq-p2">
+                        <span class="font-bold text-slate-900 text-base">Are we locked into a long-term contract?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-600 transition-transform faq-icon" aria-hidden="true"></i>
+                    </button>
+                    <div id="faq-p2" class="faq-panel hidden px-6 pb-6 text-slate-600 leading-relaxed">
+                        No. We work on a 90-day rolling partnership. We earn renewal every quarter by hitting the growth targets we set together — not by trapping you in a 12-month retainer.
+                    </div>
+                </div>
+
+                <div class="faq-item border border-slate-200 rounded-2xl overflow-hidden">
+                    <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" aria-expanded="false" aria-controls="faq-p3">
+                        <span class="font-bold text-slate-900 text-base">Who actually works on my account?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-600 transition-transform faq-icon" aria-hidden="true"></i>
+                    </button>
+                    <div id="faq-p3" class="faq-panel hidden px-6 pb-6 text-slate-600 leading-relaxed">
+                        A dedicated pod: a Growth Strategist, a Paid Media Buyer, and a Creative Lead. You get named senior people — not a junior account manager relaying messages from a silent team.
+                    </div>
+                </div>
+
+                <div class="faq-item border border-slate-200 rounded-2xl overflow-hidden">
+                    <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" aria-expanded="false" aria-controls="faq-p4">
+                        <span class="font-bold text-slate-900 text-base">How fast will we see results?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-600 transition-transform faq-icon" aria-hidden="true"></i>
+                    </button>
+                    <div id="faq-p4" class="faq-panel hidden px-6 pb-6 text-slate-600 leading-relaxed">
+                        Paid channels show movement within 2–4 weeks. SEO and CRO compound over 60–90 days. Most partners see a positive ROAS shift inside the first month and margin expansion by quarter two.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Section 06 / CONTACT -->
-    <section id="contact" class="py-28 px-6 relative overflow-hidden">
+    <section id="contact" class="py-28 px-6 relative overflow-hidden" style="scroll-margin-top: 80px;" aria-labelledby="contact-heading">
         <div class="max-w-5xl mx-auto bg-white border border-indigo-200 p-10 md:p-16 rounded-[36px] relative z-10 shadow-xl bg-gradient-to-b from-white to-indigo-50/40">
             <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-wider">
                     Selective Partner Intake
                 </div>
-                <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Ready to scale your brand predictably?</h2>
+                <h2 id="contact-heading" class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Ready to scale your brand predictably?</h2>
                 <p class="text-slate-600 text-lg">We limit partner intake to a maximum of 4 new brand partnerships per quarter to ensure hyper-focused execution.</p>
             </div>
 
-            <form id="contact-form" class="space-y-6 max-w-xl mx-auto">
+            <form id="contact-form" class="space-y-6 max-w-xl mx-auto" novalidate>
+                <!-- Honeypot: hidden from users, catches bots -->
+                <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                    <label for="b_honeypot">Leave this field empty</label>
+                    <input type="text" id="b_honeypot" name="b_honeypot" tabindex="-1" autocomplete="off">
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Your Name</label>
-                        <input type="text" required placeholder="Alex Mercer" class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm">
+                        <label for="cf-name" class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Your Name</label>
+                        <input id="cf-name" name="name" type="text" required aria-required="true" aria-describedby="cf-name-error" placeholder="Alex Mercer" class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition shadow-sm">
+                        <p id="cf-name-error" class="hidden mt-2 text-xs font-semibold text-rose-600" role="alert"></p>
                     </div>
                     <div>
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Work Email</label>
-                        <input type="email" required placeholder="alex@company.com" class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm">
+                        <label for="cf-email" class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Work Email</label>
+                        <input id="cf-email" name="email" type="email" required aria-required="true" aria-describedby="cf-email-error" placeholder="alex@company.com" class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition shadow-sm">
+                        <p id="cf-email-error" class="hidden mt-2 text-xs font-semibold text-rose-600" role="alert"></p>
                     </div>
                 </div>
                 <div>
-                    <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Monthly Marketing Budget</label>
-                    <select class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm">
-                        <option>$10,000 - $25,000 / month</option>
-                        <option>$25,000 - $50,000 / month</option>
-                        <option>$50,000 - $100,000+ / month</option>
+                    <label for="cf-budget" class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Monthly Marketing Budget</label>
+                    <select id="cf-budget" name="budget" class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition shadow-sm">
+                        <option value="10000-25000">$10,000 - $25,000 / month</option>
+                        <option value="25000-50000">$25,000 - $50,000 / month</option>
+                        <option value="50000-100000">$50,000 - $100,000+ / month</option>
                     </select>
                 </div>
                 <div>
-                    <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Growth Objectives & Current Roadblocks</label>
-                    <textarea rows="4" placeholder="Tell us about your product, target metrics, and current acquisition bottlenecks..." class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 transition shadow-sm"></textarea>
+                    <label for="cf-message" class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Growth Objectives & Current Roadblocks</label>
+                    <textarea id="cf-message" name="message" rows="4" aria-describedby="cf-message-error" placeholder="Tell us about your product, target metrics, and current acquisition bottlenecks..." class="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition shadow-sm"></textarea>
+                    <p id="cf-message-error" class="hidden mt-2 text-xs font-semibold text-rose-600" role="alert"></p>
                 </div>
-                <button type="submit" class="w-full py-4 rounded-2xl glow-cta-btn text-white font-bold text-base flex items-center justify-center gap-3">
+                <button type="submit" class="w-full py-4 rounded-2xl glow-cta-btn text-white font-bold text-base flex items-center justify-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
                     <span>Submit Strategy Session Request</span>
-                    <i data-lucide="send" class="w-5 h-5"></i>
+                    <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
                 </button>
             </form>
             <div id="form-success" class="hidden text-center p-6 text-emerald-600 font-bold text-xl">
@@ -993,16 +1197,25 @@
         </div>
     </section>
 
+    </main>
+
+    <!-- Mobile Sticky CTA -->
+    <div class="md:hidden fixed bottom-0 inset-x-0 z-40 p-4 bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-[0_-8px_24px_rgba(15,23,42,0.08)]">
+        <a href="#contact" class="w-full py-3.5 rounded-2xl glow-cta-btn text-white font-bold text-center block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+            Start Your Project
+        </a>
+    </div>
+
     <!-- Footer -->
     <footer class="py-12 px-6 border-t border-slate-200 text-slate-500 text-sm bg-white">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-xl font-extrabold text-slate-900">NEBULA<span class="text-indigo-600">.</span></div>
             <div>&copy; 2026 Nebula Growth Agency LLC. All rights reserved.</div>
             <div class="flex gap-6 font-semibold">
-                <a href="#" class="hover:text-slate-900 transition">Privacy Policy</a>
-                <a href="#" class="hover:text-slate-900 transition">Terms</a>
-                <a href="#" class="hover:text-slate-900 transition">Twitter / X</a>
-                <a href="#" class="hover:text-slate-900 transition">LinkedIn</a>
+                <a href="#" class="hover:text-slate-900 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-1">Privacy Policy</a>
+                <a href="#" class="hover:text-slate-900 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-1">Terms</a>
+                <a href="#" class="hover:text-slate-900 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-1">Twitter / X</a>
+                <a href="#" class="hover:text-slate-900 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-1">LinkedIn</a>
             </div>
         </div>
     </footer>
