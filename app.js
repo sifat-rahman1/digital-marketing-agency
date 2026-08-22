@@ -4,6 +4,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     if (window.lucide) lucide.createIcons();
 
+    initTheme();
     initMobileMenu();
     initCounters();
     initCaseTabs();
@@ -105,13 +106,23 @@ function initCounters() {
 }
 
 /* ----------------------------------------------------------------
- * Case study tabs (ARIA-aware, keyboard navigable)
+ * Case study tabs (ARIA-aware, keyboard navigable, lazy-loaded)
  * ---------------------------------------------------------------- */
 function initCaseTabs() {
     const groups = document.querySelectorAll('[role="tablist"]');
 
     groups.forEach((list) => {
         const tabs = Array.from(list.querySelectorAll('[role="tab"]'));
+        const widget = list.parentElement;
+
+        // Lazy-load: cache inactive panel content on first init
+        const panels = widget.querySelectorAll('.case-tab-content');
+        panels.forEach((panel) => {
+            if (panel.classList.contains('hidden')) {
+                panel.dataset.lazyHtml = panel.innerHTML;
+                panel.innerHTML = '';
+            }
+        });
 
         const activate = (tab, setFocus = true) => {
             const panelId = tab.getAttribute("aria-controls");
@@ -124,8 +135,13 @@ function initCaseTabs() {
                 t.classList.toggle("shadow-sm", selected);
                 t.classList.toggle("text-slate-600", !selected);
             });
-            list.parentElement.querySelectorAll(".case-tab-content").forEach((panel) => {
-                panel.classList.toggle("hidden", panel.id !== panelId);
+            widget.querySelectorAll(".case-tab-content").forEach((panel) => {
+                const isActive = panel.id === panelId;
+                panel.classList.toggle("hidden", !isActive);
+                if (isActive && !panel.innerHTML.trim() && panel.dataset.lazyHtml) {
+                    panel.innerHTML = panel.dataset.lazyHtml;
+                    if (window.lucide) lucide.createIcons();
+                }
             });
             if (setFocus) tab.focus();
         };
@@ -451,6 +467,77 @@ function initSmoothScrollPolyfill() {
             e.preventDefault();
             const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
             window.scrollTo({ top, behavior: "smooth" });
+        });
+    });
+}
+
+/* ----------------------------------------------------------------
+ * Theme switcher: flash-free, localStorage, system preference sync
+ * ---------------------------------------------------------------- */
+function initTheme() {
+    const html = document.documentElement;
+    const toggleBtn = document.getElementById("theme-toggle");
+    const toggleBtnMobile = document.getElementById("theme-toggle-mobile");
+    const icon = document.getElementById("theme-icon");
+    const iconMobile = document.getElementById("theme-icon-mobile");
+    const THEME_KEY = "theme";
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    // Read current theme set by head script
+    let currentTheme = html.getAttribute("data-theme");
+
+    // Update icons and aria-pressed
+    const syncUI = (theme) => {
+        const isLight = theme === "light";
+        const iconChar = isLight ? "☀️" : "🌙";
+        if (icon) icon.textContent = iconChar;
+        if (iconMobile) iconMobile.textContent = iconChar;
+        if (toggleBtn) toggleBtn.setAttribute("aria-pressed", String(isLight));
+        if (toggleBtnMobile) toggleBtnMobile.setAttribute("aria-pressed", String(isLight));
+    };
+
+    // Apply theme to document
+    const applyTheme = (theme) => {
+        html.setAttribute("data-theme", theme);
+        try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+        syncUI(theme);
+    };
+
+    // Toggle handler
+    const handleToggle = () => {
+        const next = currentTheme === "dark" ? "light" : "dark";
+        currentTheme = next;
+        applyTheme(next);
+    };
+
+    // Initialize UI to match head-script theme
+    if (currentTheme) syncUI(currentTheme);
+
+    // Click handlers
+    if (toggleBtn) toggleBtn.addEventListener("click", handleToggle);
+    if (toggleBtnMobile) toggleBtnMobile.addEventListener("click", handleToggle);
+
+    // System preference change listener (only if user hasn't explicitly chosen)
+    mediaQuery.addEventListener("change", (e) => {
+        try {
+            const hasExplicit = localStorage.getItem(THEME_KEY) !== null;
+            if (!hasExplicit) {
+                currentTheme = e.matches ? "dark" : "light";
+                applyTheme(currentTheme);
+            }
+        } catch (err) {
+            // ignore
+        }
+    });
+
+    // Keyboard support for toggle buttons (Space/Enter)
+    [toggleBtn, toggleBtnMobile].forEach((btn) => {
+        if (!btn) return;
+        btn.addEventListener("keydown", (e) => {
+            if (e.key === " " || e.key === "Enter") {
+                e.preventDefault();
+                handleToggle();
+            }
         });
     });
 }
