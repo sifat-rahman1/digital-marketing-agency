@@ -400,7 +400,7 @@ function initContactForm() {
         });
     });
 
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
 
         // Honeypot: silently reject bot submissions.
@@ -415,7 +415,6 @@ function initContactForm() {
             return;
         }
 
-        // Prepare FormData
         const formData = new FormData(form);
 
         // UI: show sending state
@@ -423,39 +422,39 @@ function initContactForm() {
         const originalText = btnText.textContent;
         btnText.textContent = "Sending...";
 
-        try {
-            const response = await fetch(form.action, {
-                method: "POST",
-                body: formData,
-                headers: { "Accept": "application/json" }
-            });
-
+        // Exact Formspree AJAX fetch structure
+        fetch("https://formspree.io/f/mljrvlnj", {
+            method: "POST",
+            body: formData,
+            headers: { "Accept": "application/json" }
+        }).then(response => {
             if (response.ok) {
                 form.reset();
                 form.classList.add("hidden");
                 if (success) {
-                    success.textContent = "Thank you! Your message has been sent. We'll be in touch shortly.";
+                    success.textContent = "Thank you! Strategy session request received.";
+                    success.className = "text-emerald-400 mt-4 text-sm text-center";
                     success.classList.remove("hidden");
                 }
             } else {
-                throw new Error("Submission failed");
+                response.json().then(data => {
+                    if (Object.hasOwn(data, "errors")) {
+                        success.textContent = data.errors.map(err => err.message).join(", ");
+                    } else {
+                        success.textContent = "Oops! There was a problem submitting your form.";
+                    }
+                    success.className = "text-red-400 mt-4 text-sm text-center";
+                    success.classList.remove("hidden");
+                });
             }
-        } catch (err) {
-            // Graceful inline error
-            const errMsg = document.createElement("p");
-            errMsg.className = "text-center mt-4 text-sm font-semibold text-rose-600";
-            errMsg.textContent = "Something went wrong. Please try again or email us directly.";
-            // Remove any existing error message
-            const existing = form.querySelector(".form-submit-error");
-            if (existing) existing.remove();
-            errMsg.classList.add("form-submit-error");
-            form.appendChild(errMsg);
-            // Auto-remove after 8s
-            setTimeout(() => errMsg.remove(), 8000);
-        } finally {
+        }).catch(() => {
+            success.textContent = "Oops! Network error. Please try again.";
+            success.className = "text-red-400 mt-4 text-sm text-center";
+            success.classList.remove("hidden");
+        }).finally(() => {
             submitBtn.disabled = false;
             btnText.textContent = originalText;
-        }
+        });
     });
 }
 
