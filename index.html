@@ -1259,11 +1259,11 @@
                 <p class="text-slate-600 text-lg">We limit partner intake to a maximum of 4 new brand partnerships per quarter to ensure hyper-focused execution.</p>
             </div>
 
-            <form id="contact-form" class="space-y-6 max-w-xl mx-auto" novalidate>
-                <!-- Honeypot: hidden from users, catches bots -->
+            <form id="contact-form" class="space-y-6 max-w-xl mx-auto" novalidate action="https://formspree.io/f/mljrvlnj" method="POST">
+                <!-- Honeypot: hidden from users, catches bots (Formspree uses _gotcha) -->
                 <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
                     <label for="b_honeypot">Leave this field empty</label>
-                    <input type="text" id="b_honeypot" name="b_honeypot" tabindex="-1" autocomplete="off">
+                    <input type="text" id="b_honeypot" name="_gotcha" tabindex="-1" autocomplete="off">
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

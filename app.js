@@ -348,11 +348,13 @@ function initFaq() {
 }
 
 /* ----------------------------------------------------------------
- * Contact form: inline validation + honeypot + success state
+ * Contact form: inline validation + honeypot + AJAX submission to Formspree
  * ---------------------------------------------------------------- */
 function initContactForm() {
     const form = document.getElementById("contact-form");
     const success = document.getElementById("form-success");
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const btnText = submitBtn.querySelector('span');
     if (!form) return;
 
     const honeypot = document.getElementById("b_honeypot");
@@ -378,6 +380,7 @@ function initContactForm() {
             if (!el.value.trim()) msg = "Please enter your work email.";
             else if (!emailRe.test(el.value.trim())) msg = "Please enter a valid email address.";
         }
+        if (key === "message" && !el.value.trim()) msg = "Please enter your message.";
         if (msg) {
             err.textContent = msg;
             err.classList.remove("hidden");
@@ -397,13 +400,13 @@ function initContactForm() {
         });
     });
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         // Honeypot: silently reject bot submissions.
         if (honeypot && honeypot.value.trim() !== "") return;
 
-        const results = [validateField("name"), validateField("email")];
+        const results = [validateField("name"), validateField("email"), validateField("message")];
         if (results.includes(false)) {
             const firstInvalid = Object.values(fields).find(
                 (el) => el.getAttribute("aria-invalid") === "true"
@@ -412,8 +415,47 @@ function initContactForm() {
             return;
         }
 
-        form.classList.add("hidden");
-        if (success) success.classList.remove("hidden");
+        // Prepare FormData
+        const formData = new FormData(form);
+
+        // UI: show sending state
+        submitBtn.disabled = true;
+        const originalText = btnText.textContent;
+        btnText.textContent = "Sending...";
+
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            });
+
+            if (response.ok) {
+                form.reset();
+                form.classList.add("hidden");
+                if (success) {
+                    success.textContent = "Thank you! Your message has been sent. We'll be in touch shortly.";
+                    success.classList.remove("hidden");
+                }
+            } else {
+                throw new Error("Submission failed");
+            }
+        } catch (err) {
+            // Graceful inline error
+            const errMsg = document.createElement("p");
+            errMsg.className = "text-center mt-4 text-sm font-semibold text-rose-600";
+            errMsg.textContent = "Something went wrong. Please try again or email us directly.";
+            // Remove any existing error message
+            const existing = form.querySelector(".form-submit-error");
+            if (existing) existing.remove();
+            errMsg.classList.add("form-submit-error");
+            form.appendChild(errMsg);
+            // Auto-remove after 8s
+            setTimeout(() => errMsg.remove(), 8000);
+        } finally {
+            submitBtn.disabled = false;
+            btnText.textContent = originalText;
+        }
     });
 }
 
