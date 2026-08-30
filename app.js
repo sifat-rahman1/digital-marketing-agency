@@ -4,6 +4,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     if (window.lucide) lucide.createIcons();
 
+    initLoader();
     initTheme();
     initMobileMenu();
     initCounters();
@@ -15,6 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
     initScrollSpy();
     initSmoothScrollPolyfill();
 });
+
+/* ----------------------------------------------------------------
+ * Page Loader overlay fade out
+ * ---------------------------------------------------------------- */
+function initLoader() {
+    const loader = document.getElementById("page-loader");
+    if (!loader) return;
+    // Show the gorgeous 3D isometric animation briefly, then fade out
+    setTimeout(() => {
+        loader.classList.add("fade-out");
+        loader.setAttribute("aria-hidden", "true");
+    }, 750);
+}
 
 /* ----------------------------------------------------------------
  * Mobile menu toggle (with aria-expanded sync)
@@ -357,6 +371,7 @@ function initContactForm() {
     const btnText = submitBtn.querySelector('span');
     if (!form) return;
 
+    const formLoader = document.getElementById("form-loader");
     const honeypot = document.getElementById("b_honeypot");
     const fields = {
         name: document.getElementById("cf-name"),
@@ -417,10 +432,14 @@ function initContactForm() {
 
         const formData = new FormData(form);
 
-        // UI: show sending state
+        // UI: show sending state & activate loader overlay
         submitBtn.disabled = true;
         const originalText = btnText.textContent;
         btnText.textContent = "Sending...";
+        if (formLoader) {
+            formLoader.classList.add("active");
+            formLoader.removeAttribute("aria-hidden");
+        }
 
         // Exact Formspree AJAX fetch structure
         fetch("https://formspree.io/f/mljrvlnj", {
@@ -454,6 +473,10 @@ function initContactForm() {
         }).finally(() => {
             submitBtn.disabled = false;
             btnText.textContent = originalText;
+            if (formLoader) {
+                formLoader.classList.remove("active");
+                formLoader.setAttribute("aria-hidden", "true");
+            }
         });
     });
 }
