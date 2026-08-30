@@ -513,28 +513,23 @@ function initSmoothScrollPolyfill() {
 }
 
 /* ----------------------------------------------------------------
- * Theme switcher: flash-free, localStorage, system preference sync
+ * Theme switcher: animated checkbox toggle switch with system preference sync
  * ---------------------------------------------------------------- */
 function initTheme() {
     const html = document.documentElement;
-    const toggleBtn = document.getElementById("theme-toggle");
-    const toggleBtnMobile = document.getElementById("theme-toggle-mobile");
-    const icon = document.getElementById("theme-icon");
-    const iconMobile = document.getElementById("theme-icon-mobile");
+    const toggleCheckbox = document.getElementById("theme-toggle");
+    const toggleCheckboxMobile = document.getElementById("theme-toggle-mobile");
     const THEME_KEY = "theme";
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
     // Read current theme set by head script
-    let currentTheme = html.getAttribute("data-theme");
+    let currentTheme = html.getAttribute("data-theme") || "light";
 
-    // Update icons and aria-pressed
+    // Update checkboxes state (checked = dark mode)
     const syncUI = (theme) => {
-        const isLight = theme === "light";
-        const iconChar = isLight ? "☀️" : "🌙";
-        if (icon) icon.textContent = iconChar;
-        if (iconMobile) iconMobile.textContent = iconChar;
-        if (toggleBtn) toggleBtn.setAttribute("aria-pressed", String(isLight));
-        if (toggleBtnMobile) toggleBtnMobile.setAttribute("aria-pressed", String(isLight));
+        const isDark = theme === "dark";
+        if (toggleCheckbox) toggleCheckbox.checked = isDark;
+        if (toggleCheckboxMobile) toggleCheckboxMobile.checked = isDark;
     };
 
     // Apply theme to document
@@ -544,21 +539,21 @@ function initTheme() {
         syncUI(theme);
     };
 
-    // Toggle handler
-    const handleToggle = () => {
-        const next = currentTheme === "dark" ? "light" : "dark";
-        currentTheme = next;
-        applyTheme(next);
+    // Toggle handler driven by checkbox state change
+    const handleToggle = (e) => {
+        const targetTheme = e.target.checked ? "dark" : "light";
+        currentTheme = targetTheme;
+        applyTheme(targetTheme);
     };
 
-    // Initialize UI to match head-script theme
-    if (currentTheme) syncUI(currentTheme);
+    // Initialize UI to match current theme
+    syncUI(currentTheme);
 
-    // Click handlers
-    if (toggleBtn) toggleBtn.addEventListener("click", handleToggle);
-    if (toggleBtnMobile) toggleBtnMobile.addEventListener("click", handleToggle);
+    // Change event handlers for both desktop & mobile inputs
+    if (toggleCheckbox) toggleCheckbox.addEventListener("change", handleToggle);
+    if (toggleCheckboxMobile) toggleCheckboxMobile.addEventListener("change", handleToggle);
 
-    // System preference change listener (only if user hasn't explicitly chosen)
+    // System preference change listener
     mediaQuery.addEventListener("change", (e) => {
         try {
             const hasExplicit = localStorage.getItem(THEME_KEY) !== null;
@@ -569,16 +564,5 @@ function initTheme() {
         } catch (err) {
             // ignore
         }
-    });
-
-    // Keyboard support for toggle buttons (Space/Enter)
-    [toggleBtn, toggleBtnMobile].forEach((btn) => {
-        if (!btn) return;
-        btn.addEventListener("keydown", (e) => {
-            if (e.key === " " || e.key === "Enter") {
-                e.preventDefault();
-                handleToggle();
-            }
-        });
     });
 }

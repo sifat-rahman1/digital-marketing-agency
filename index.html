@@ -228,17 +228,131 @@
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
-        /* Theme toggle button */
-        .theme-toggle-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 40px; height: 40px; border-radius: 9999px; flex: none;
-            border: 1px solid var(--border);
-            background: var(--surface-2); color: var(--text); cursor: pointer;
+        /* Theme toggle switch - Uiverse.io by andrew-demchenk0 */
+        .theme-switch {
+            font-size: 17px;
+            position: relative;
+            display: inline-block;
+            width: 64px;
+            height: 34px;
+            flex: none;
         }
-        .theme-toggle-btn:hover { border-color: var(--indigo-border); }
-        .theme-toggle-btn:focus-visible {
-            outline: none; ring: 2px; ring-offset: 2px; ring-color: #4338ca;
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
         }
+
+        .theme-switch .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--indigo-bg, #73C0FC);
+            transition: background-color 0.4s ease;
+            border-radius: 30px;
+        }
+
+        .theme-switch .slider:before {
+            position: absolute;
+            content: "";
+            height: 30px;
+            width: 30px;
+            border-radius: 20px;
+            left: 2px;
+            bottom: 2px;
+            z-index: 2;
+            background-color: var(--surface, #e8e8e8);
+            transition: transform 0.4s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .theme-switch .sun {
+            position: absolute;
+            top: 6px;
+            left: 36px;
+            z-index: 1;
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+        }
+
+        .theme-switch .sun svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .theme-switch .moon {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            z-index: 1;
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+        }
+
+        .theme-switch .moon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--indigo-bg, #73C0FC);
+        }
+
+        /* Animations - respect prefers-reduced-motion */
+        @media (prefers-reduced-motion: no-preference) {
+            .theme-switch .sun svg {
+                animation: rotate 15s linear infinite;
+            }
+            .theme-switch .moon svg {
+                animation: tilt 5s linear infinite;
+            }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes tilt {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .theme-switch input:checked + .slider {
+            background-color: var(--indigo-text-strong, #183153);
+        }
+
+        .theme-switch input:focus-visible + .slider {
+            box-shadow: 0 0 0 3px var(--indigo-border, #4338ca);
+            outline: none;
+        }
+
+        .theme-switch input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Dark mode adjustments for switch */
+        [data-theme="dark"] .theme-switch .slider {
+            background-color: var(--indigo-bg, #73C0FC);
+        }
+
+        [data-theme="dark"] .theme-switch .slider:before {
+            background-color: var(--surface, #e8e8e8);
+        }
+
+        [data-theme="dark"] .theme-switch .moon svg {
+            fill: var(--indigo-bg, #73C0FC);
+        }
+
+        [data-theme="dark"] .theme-switch input:checked + .slider {
+            background-color: var(--indigo-text-strong, #183153);
+        }
+
         .light-nav {
             background: var(--nav-bg);
             backdrop-filter: blur(16px);
@@ -386,10 +500,13 @@
                 <a href="#process" class="hover:text-indigo-600 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-2 py-1" role="menuitem">Methodology</a>
             </div>
 
-            <!-- Theme Toggle (Desktop) -->
-            <button id="theme-toggle" type="button" class="theme-toggle-btn hidden md:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" aria-label="Toggle visual theme" aria-pressed="false">
-                <span id="theme-icon" aria-hidden="true">🌙</span>
-            </button>
+            <!-- Theme Toggle (Desktop) - Animated UIverse Switch -->
+            <label class="theme-switch hidden md:inline-block" aria-label="Toggle dark mode">
+                <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#ffd43b"><circle r="5" cy="12" cx="12"></circle><path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path></g></svg></span>
+                <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></span>   
+                <input type="checkbox" id="theme-toggle" class="input" aria-label="Toggle dark mode">
+                <span class="slider"></span>
+            </label>
 
             <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full glow-cta-btn text-white font-semibold text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" role="menuitem">
                 <span>Start Project</span>
@@ -404,10 +521,13 @@
 
     <!-- Mobile Menu Drawer -->
     <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-2xl z-40 hidden flex-col justify-center items-center gap-8 text-2xl font-bold text-slate-900" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
-        <!-- Theme Toggle (Mobile) -->
-        <button id="theme-toggle-mobile" type="button" class="theme-toggle-btn self-end mr-6 mt-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2" aria-label="Toggle visual theme" aria-pressed="false">
-            <span id="theme-icon-mobile" aria-hidden="true">🌙</span>
-        </button>
+        <!-- Theme Toggle (Mobile) - Animated UIverse Switch -->
+        <label class="theme-switch self-end mr-6 mt-6" aria-label="Toggle dark mode">
+            <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#ffd43b"><circle r="5" cy="12" cx="12"></circle><path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path></g></svg></span>
+            <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></span>   
+            <input type="checkbox" id="theme-toggle-mobile" class="input" aria-label="Toggle dark mode">
+            <span class="slider"></span>
+        </label>
         <a href="#services" class="mobile-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-4 py-2">Capabilities</a>
         <a href="#work" class="mobile-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-4 py-2">Case Studies</a>
         <a href="#estimator" class="mobile-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-4 py-2">Campaign Estimator</a>
