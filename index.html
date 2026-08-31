@@ -639,6 +639,112 @@
             50% { transform: translate(200%, 100%); }
             100% { transform: translate(100%, 100%); }
         }
+
+        /* Back to Top Button (Fix #16) */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 50;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--surface-2, #0b0f19);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 0px 12px rgba(0, 240, 255, 0.2);
+            cursor: pointer;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease, width 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            padding: 0;
+            margin: 0;
+        }
+
+        .back-to-top-btn.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top-btn .svgIcon {
+            width: 14px;
+            transition-duration: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .back-to-top-btn .svgIcon path {
+            fill: #00F0FF;
+            transition: fill 0.3s ease;
+        }
+
+        .back-to-top-btn:hover {
+            width: 140px;
+            border-radius: 50px;
+            background-color: #0066FF;
+            box-shadow: 0px 0px 16px rgba(0, 102, 255, 0.5);
+            border-color: transparent;
+        }
+
+        .back-to-top-btn:hover .svgIcon {
+            transform: translateY(-200%);
+            transition-duration: 0.3s;
+        }
+
+        .back-to-top-btn::before {
+            position: absolute;
+            bottom: -20px;
+            content: "Back to Top";
+            color: #ffffff;
+            font-size: 0px;
+            font-family: inherit;
+            transition-duration: 0.3s;
+            white-space: nowrap;
+        }
+
+        .back-to-top-btn:hover::before {
+            font-size: 13px;
+            opacity: 1;
+            bottom: unset;
+            transition-duration: 0.3s;
+        }
+
+        /* Light theme adjustments */
+        [data-theme="light"] .back-to-top-btn {
+            background-color: var(--surface, #ffffff);
+            border-color: rgba(0, 102, 255, 0.3);
+            box-shadow: 0px 0px 12px rgba(0, 102, 255, 0.15);
+        }
+
+        [data-theme="light"] .back-to-top-btn .svgIcon path {
+            fill: #0066FF;
+        }
+
+        /* Focus visible for accessibility */
+        .back-to-top-btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.5), 0px 0px 12px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .back-to-top-btn {
+                transition: none;
+            }
+            .back-to-top-btn:hover {
+                width: 50px;
+                border-radius: 50%;
+            }
+            .back-to-top-btn:hover .svgIcon {
+                transform: none;
+            }
+            .back-to-top-btn::before {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="overflow-x-hidden selection:bg-indigo-600 selection:text-white grid-bg">
@@ -1694,5 +1800,13 @@
     </footer>
 
     <script src="app.js"></script>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" aria-label="Scroll to top" class="back-to-top-btn">
+        <svg class="svgIcon" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2l105.4 105.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path>
+        </svg>
+    </button>
+
 </body>
 </html>

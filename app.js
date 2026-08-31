@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initContactForm();
     initScrollSpy();
     initSmoothScrollPolyfill();
+    initBackToTop();
 });
 
 /* ----------------------------------------------------------------
@@ -588,4 +589,42 @@ function initTheme() {
             // ignore
         }
     });
+}
+
+/* ----------------------------------------------------------------
+ * Back to Top Button (Fix #16)
+ * ---------------------------------------------------------------- */
+function initBackToTop() {
+    const btn = document.getElementById("backToTopBtn");
+    if (!btn) return;
+
+    const toggleVisibility = () => {
+        if (window.scrollY > 300) {
+            btn.classList.add("visible");
+        } else {
+            btn.classList.remove("visible");
+        }
+    };
+
+    // Throttled scroll listener for performance
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                toggleVisibility();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    btn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    // Initialize visibility on load
+    toggleVisibility();
 }
