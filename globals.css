@@ -263,3 +263,185 @@ body.light .back-to-top-btn:hover::before,
 .light .back-to-top-btn:hover::before {
   color: #ffffff !important;
 }
+
+/* UIverse Animated CTA Button (OliverZeros - NEBULA Brand Edition) */
+.uiverse-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #0066FF;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 102, 255, 0.35);
+  color: #ffffff !important;
+  font-family: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  vertical-align: middle;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.uiverse-btn:hover {
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.6), 0 0 15px rgba(0, 102, 255, 0.5);
+  border-color: #00F0FF;
+  transform: translateY(-2px);
+  color: #ffffff !important;
+}
+
+.uiverse-btn .button-bg {
+  overflow: hidden;
+  border-radius: 9999px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0066FF;
+  transform: scale(1);
+  transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+}
+
+.uiverse-btn .button-bg-layers {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: -60%;
+  transform: translateX(-50%);
+  aspect-ratio: 1 / 1;
+  width: max(200%, 10rem);
+  pointer-events: none;
+}
+
+.uiverse-btn .button-bg-layer {
+  border-radius: 9999px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(0);
+  display: block;
+}
+
+.uiverse-btn .button-bg-layer.-indigo {
+  background-color: #3730A3;
+}
+
+.uiverse-btn .button-bg-layer.-cyan {
+  background-color: #00F0FF;
+}
+
+.uiverse-btn .button-bg-layer.-royal {
+  background-color: #0066FF;
+}
+
+.uiverse-btn:hover .button-bg-layer {
+  transition: transform 1.3s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear;
+}
+
+.uiverse-btn:hover .button-bg-layer.-indigo {
+  transform: scale(1);
+}
+
+.uiverse-btn:hover .button-bg-layer.-cyan {
+  transition-delay: 0.08s;
+  transform: scale(1);
+}
+
+.uiverse-btn:hover .button-bg-layer.-royal {
+  transition-delay: 0.18s;
+  transform: scale(1);
+}
+
+.uiverse-btn .button-inner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  color: #ffffff !important;
+}
+
+.uiverse-btn .button-inner-static,
+.uiverse-btn .button-inner-hover {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  color: #ffffff !important;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease;
+}
+
+.uiverse-btn .button-inner-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateY(75%);
+}
+
+.uiverse-btn:hover .button-inner-static {
+  opacity: 0;
+  transform: translateY(-75%);
+}
+
+.uiverse-btn:hover .button-inner-hover {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Strict Light & Dark Mode protocol (No invisible text) */
+html.light .uiverse-btn,
+body.light .uiverse-btn,
+.light .uiverse-btn,
+[data-theme="light"] .uiverse-btn {
+  background-color: #0066FF;
+  color: #ffffff !important;
+}
+
+html.light .uiverse-btn .button-inner,
+body.light .uiverse-btn .button-inner,
+.light .uiverse-btn .button-inner,
+[data-theme="light"] .uiverse-btn .button-inner,
+html.light .uiverse-btn .button-inner-static,
+body.light .uiverse-btn .button-inner-static,
+.light .uiverse-btn .button-inner-static,
+[data-theme="light"] .uiverse-btn .button-inner-static,
+html.light .uiverse-btn .button-inner-hover,
+body.light .uiverse-btn .button-inner-hover,
+.light .uiverse-btn .button-inner-hover,
+[data-theme="light"] .uiverse-btn .button-inner-hover {
+  color: #ffffff !important;
+}
+
+/* Focus rings for WCAG 2.1 AA accessibility */
+.uiverse-btn:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px #00F0FF, 0 0 20px rgba(0, 102, 255, 0.6) !important;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .uiverse-btn .button-bg-layer {
+    display: none !important;
+  }
+  .uiverse-btn:hover .button-inner-static {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .uiverse-btn .button-inner-hover {
+    display: none !important;
+  }
+}

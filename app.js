@@ -369,7 +369,7 @@ function initContactForm() {
     const form = document.getElementById("contact-form");
     const success = document.getElementById("form-success");
     const submitBtn = form.querySelector('button[type="submit"]');
-    const btnText = submitBtn.querySelector('span');
+    const btnTexts = submitBtn.querySelectorAll('.btn-text');
     if (!form) return;
 
     const formLoader = document.getElementById("form-loader");
@@ -435,8 +435,8 @@ function initContactForm() {
 
         // UI: show sending state & activate loader overlay
         submitBtn.disabled = true;
-        const originalText = btnText.textContent;
-        btnText.textContent = "Sending...";
+        const originalText = btnTexts[0]?.textContent || "Submit";
+        btnTexts.forEach(span => span.textContent = "Sending...");
         if (formLoader) {
             formLoader.classList.add("active");
             formLoader.removeAttribute("aria-hidden");
@@ -473,7 +473,7 @@ function initContactForm() {
             success.classList.remove("hidden");
         }).finally(() => {
             submitBtn.disabled = false;
-            btnText.textContent = originalText;
+            btnTexts.forEach(span => span.textContent = originalText);
             if (formLoader) {
                 formLoader.classList.remove("active");
                 formLoader.setAttribute("aria-hidden", "true");
