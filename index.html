@@ -18,7 +18,7 @@
         })();
     </script>
 
-    <meta name="description" content="NEBULA — Premium growth & performance agency. Predictable revenue scale for category leaders through paid media, SEO, social, and CRO. Book a strategy consultation.">
+    <meta name="description" content="NEBULA is a premium growth & performance agency for $10M–$100M+ brands. We deliver predictable revenue scale through paid media, enterprise SEO, social virality, and CRO. Book your free strategy consultation today.">
     <meta name="theme-color" content="#4338ca">
     <link rel="canonical" href="https://nebula-agency.com/">
     
@@ -35,11 +35,19 @@
     <meta name="twitter:description" content="Predictable revenue scale for category leaders. Book a strategy consultation.">
     <meta name="twitter:image" content="https://nebula-agency.com/og-image.jpg">
     
+    <!-- Preconnect for Formspree (Fix #17) -->
+    <link rel="preconnect" href="https://formspree.io" crossorigin>
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="NEBULA">
+    
     <!-- Clean Google Font with font-display:swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -151,7 +159,8 @@
         "ratingValue": "5.0",
         "reviewCount": "3",
         "bestRating": "5",
-        "worstRating": "1"
+        "worstRating": "1",
+        "description": "Based on verified client testimonials and case study results from enterprise partners."
     }
     </script>
     
@@ -423,20 +432,6 @@
             border-color: #4338ca;
             box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.45);
         }
-        /* Glowing Gradient Borders on key CTA Buttons */
-        .glow-cta-btn {
-            position: relative;
-            background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);
-            border: 1px solid rgba(199, 210, 254, 0.6);
-            box-shadow: 0 0 20px rgba(67, 56, 202, 0.35);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .glow-cta-btn:hover {
-            box-shadow: 0 0 35px rgba(67, 56, 202, 0.6), 0 0 15px rgba(2, 132, 199, 0.4);
-            border-color: #a5b4fc;
-            transform: translateY(-2px);
-        }
-
         /* ==========================================================================
            UIverse Animated Button (OliverZeros - NEBULA Brand Edition)
            Palette: Cyan (#00F0FF), Royal Blue (#0066FF), Deep Indigo (#3730A3)
@@ -935,6 +930,9 @@
 </head>
 <body class="overflow-x-hidden selection:bg-indigo-600 selection:text-white grid-bg">
 
+    <!-- Skip Navigation Link (Fix #1) -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:outline-none">Skip to main content</a>
+
     <!-- Full-page Loader Overlay (Fix #15) -->
     <div id="page-loader" class="loader-overlay" aria-hidden="true">
         <div class="boxes">
@@ -973,7 +971,7 @@
                     <span class="font-bold text-xl tracking-wider text-slate-900 dark:text-white">NEBULA</span>
                 </a>
             
-            <div class="hidden md:flex items-center gap-10 text-sm font-semibold text-slate-600" role="menubar">
+                <div class="hidden md:flex items-center gap-10 text-sm font-semibold" role="navigation" aria-label="Desktop navigation">
                 <a href="#services" class="hover:text-indigo-600 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-2 py-1" role="menuitem">Capabilities</a>
                 <a href="#work" class="hover:text-indigo-600 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-2 py-1" role="menuitem">Case Studies</a>
                 <a href="#estimator" class="hover:text-indigo-600 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-2 py-1" role="menuitem">Campaign Estimator</a>
@@ -1009,7 +1007,7 @@
     </nav>
 
     <!-- Mobile Menu Drawer -->
-    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-2xl z-40 hidden flex-col justify-center items-center gap-8 text-2xl font-bold text-slate-900" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
+    <div id="mobile-menu" class="fixed inset-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl z-40 hidden flex-col justify-center items-center gap-8 text-2xl font-bold" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
         <!-- Theme Toggle (Mobile) - Animated UIverse Switch -->
         <label class="theme-switch self-end mr-6 mt-6" aria-label="Toggle dark mode">
             <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#ffd43b"><circle r="5" cy="12" cx="12"></circle><path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path></g></svg></span>
@@ -2021,7 +2019,7 @@
                     </span>
                 </button>
             </form>
-            <div id="form-success" class="hidden text-center p-6 text-emerald-600 font-bold text-xl">
+            <div id="form-success" class="hidden text-center p-6 text-emerald-600 font-bold text-xl" role="status" aria-live="polite">
                 Thank you! Our growth partner lead will reach out within 24 hours.
             </div>
         </div>

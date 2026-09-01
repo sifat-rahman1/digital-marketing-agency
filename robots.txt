@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nebula-agency.com/sitemap.xml
+
+# Allow crawling of all content
+Disallow:

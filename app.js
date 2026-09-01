@@ -24,14 +24,21 @@ document.addEventListener("DOMContentLoaded", () => {
 function initLoader() {
     const loader = document.getElementById("page-loader");
     if (!loader) return;
-    // Show the gorgeous 3D isometric animation briefly, then fade out
-    setTimeout(() => {
-        loader.classList.add("fade-out");
-        loader.setAttribute("aria-hidden", "true");
-    }, 750);
-}
-
-/* ----------------------------------------------------------------
+    
+    // Wait for page to fully load, then fade out (Fix #7)
+    if (document.readyState === "complete") {
+        setTimeout(() => {
+            loader.classList.add("fade-out");
+            loader.setAttribute("aria-hidden", "true");
+        }, 300);
+    } else {
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                loader.classList.add("fade-out");
+                loader.setAttribute("aria-hidden", "true");
+            }, 300);
+        });
+    /* ----------------------------------------------------------------
  * Mobile menu toggle (with aria-expanded sync)
  * ---------------------------------------------------------------- */
 function initMobileMenu() {
@@ -58,9 +65,39 @@ function initMobileMenu() {
         setOpen(isOpen ? false : true);
     });
 
+    // Backdrop click to close (Fix #11)
+    mobileMenu.addEventListener("click", (e) => {
+        if (e.target === mobileMenu) setOpen(false);
+    });
+
     mobileLinks.forEach((link) =>
         link.addEventListener("click", () => setOpen(false))
     );
+
+    // Focus trap (Fix #2)
+    const setupFocusTrap = () => {
+        const focusable = [...mobileMenu.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')];
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        
+        mobileMenu.addEventListener("keydown", (e) => {
+            if (e.key !== "Tab") return;
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        });
+    };
+
+    // Watch for menu open to set up focus trap
+    const observer = new MutationObserver(() => {
+        if (!mobileMenu.classList.contains("hidden")) setupFocusTrap();
+    });
+    observer.observe(mobileMenu, { attributes: true, attributeFilter: ["class"] });
 
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && !mobileMenu.classList.contains("hidden")) {
@@ -276,7 +313,12 @@ function initEstimator() {
         }
 
         persistAndSync(budget);
-    };
+
+        // Persist active channels to localStorage (Fix #8)
+        const savedChannelStates = Array.from(chips)
+            .filter(c => c.getAttribute("aria-checked") === "true")
+            .map(c => c.dataset.channel);
+        try { localStorage.setItem("nebula_est_channels", JSON.stringify(savedChannelStates)); } catch (e) {}
 
     chips.forEach((chip) => {
         chip.addEventListener("click", () => {
@@ -297,6 +339,24 @@ function initEstimator() {
             if (v >= parseInt(slider.min, 10) && v <= parseInt(slider.max, 10)) {
                 slider.value = v;
             }
+        }
+    } catch (e) {}
+
+    // Restore active channel selections (Fix #8)
+    try {
+        const savedChannels = localStorage.getItem("nebula_est_channels");
+        if (savedChannels) {
+            const channels = JSON.parse(savedChannels);
+            chips.forEach(chip => {
+                const ch = chip.dataset.channel;
+                if (channels.includes(ch)) {
+                    chip.setAttribute("aria-checked", "true");
+                    chip.classList.add("active");
+                } else {
+                    chip.setAttribute("aria-checked", "false");
+                    chip.classList.remove("active");
+                }
+            });
         }
     } catch (e) {}
 
@@ -483,14 +543,20 @@ function initContactForm() {
 }
 
 /* ----------------------------------------------------------------
- * Scroll-spy: highlight active nav link
+ * Scroll-spy: highlight active nav link (Fix #10 - extended to all sections)
  * ---------------------------------------------------------------- */
 function initScrollSpy() {
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+    // Include all sections, not just nav-linked ones (Fix #10)
+    const allSections = Array.from(document.querySelectorAll('section[id]'));
     const ids = Array.from(navLinks)
         .map((a) => a.getAttribute("href").slice(1))
         .filter(Boolean);
-    const sections = ids
+    
+    // Combine nav-linked IDs with all section IDs for comprehensive spy
+    const allIds = [...new Set([...ids, ...allSections.map(s => s.id)])];
+    const sections = allIds
         .map((id) => document.getElementById(id))
         .filter(Boolean);
 

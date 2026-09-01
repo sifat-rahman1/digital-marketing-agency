@@ -1,0 +1,18 @@
+{
+  "name": "NEBULA Growth Agency",
+  "short_name": "NEBULA",
+  "description": "Premium growth & performance agency for category leaders",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#4338ca",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
