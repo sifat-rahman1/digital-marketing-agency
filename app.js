@@ -24,23 +24,24 @@ document.addEventListener("DOMContentLoaded", () => {
 function initLoader() {
     const loader = document.getElementById("page-loader");
     if (!loader) return;
-    
-    // Wait for page to fully load, then fade out (Fix #7)
-    if (document.readyState === "complete") {
+
+    const hideLoader = () => {
+        if (loader.classList.contains("fade-out")) return;
+        loader.classList.add("fade-out");
+        loader.setAttribute("aria-hidden", "true");
         setTimeout(() => {
-            loader.classList.add("fade-out");
-            loader.setAttribute("aria-hidden", "true");
-        }, 300);
+            loader.style.display = "none";
+        }, 500);
+    };
+
+    if (document.readyState === "complete") {
+        setTimeout(hideLoader, 300);
     } else {
-        window.addEventListener("load", () => {
-            setTimeout(() => {
-                loader.classList.add("fade-out");
-                loader.setAttribute("aria-hidden", "true");
-            }, 300);
-        });
-    /* ----------------------------------------------------------------
- * Mobile menu toggle (with aria-expanded sync)
- * ---------------------------------------------------------------- */
+        window.addEventListener("load", () => setTimeout(hideLoader, 300), { once: true });
+    }
+
+    setTimeout(hideLoader, 1500);
+}
 function initMobileMenu() {
     const menuBtn = document.getElementById("menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
@@ -319,6 +320,7 @@ function initEstimator() {
             .filter(c => c.getAttribute("aria-checked") === "true")
             .map(c => c.dataset.channel);
         try { localStorage.setItem("nebula_est_channels", JSON.stringify(savedChannelStates)); } catch (e) {}
+    };
 
     chips.forEach((chip) => {
         chip.addEventListener("click", () => {
